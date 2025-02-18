@@ -6,17 +6,9 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
-import { imageReducer, imageErrorReducer, imageLoadingReducer } from "./aws";
-
-const combinedImageReducer = combineReducers({
-  loading: imageLoadingReducer,
-  allImages: imageReducer,
-  error: imageErrorReducer,
-});
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  images: combinedImageReducer,
 });
 
 let enhancer;

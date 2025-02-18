@@ -61,7 +61,7 @@ function SignupFormPage() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-
+            required
           />
         </label>
         {errors.username && <p>{errors.username}</p>}

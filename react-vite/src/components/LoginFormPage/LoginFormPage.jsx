@@ -46,16 +46,6 @@ function LoginFormPage() {
             required
           />
         </label>
-        <label>
-          age
-          <input
-            type="number"
-            min="1"
-            max="100"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
         {errors.email && <p>{errors.email}</p>}
         <label>
           Password
