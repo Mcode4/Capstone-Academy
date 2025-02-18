@@ -2,6 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+import LandingPage from '../components/LandingPage';
+import HomePage from '../components/HomePage/HomePage';
+import ProfilePage from '../components/ProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <LandingPage />,
       },
       {
         path: "login",
@@ -18,6 +21,22 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignupFormPage />,
+      },
+      {
+        path: "home",
+        element: <HomePage />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "settings",
+        element: <HomePage />,
+      },
+      {
+        path: "*",
+        element: <h1>404 Page Not Found</h1>,
       },
     ],
   },
