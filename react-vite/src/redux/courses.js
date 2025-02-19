@@ -18,19 +18,28 @@ export const loadAllCourses = () => async(dispatch)=> {
         console.log('DATA', data)
         dispatch(loadCourses(data))
     }
-    return
+    else if(res.status > 500){
+        const err = await res.json()
+        console.log('ERR FETCHING COURSES', err)
+    }
+    else {
+        console.log('SOME WENT WRONG ON COURSES THUNK')
+    }
 }
 
-const initialState = {courses: [], featuredCourses: []}
+const initialState = {featured: [], all: []}
 
 function courseReducer(state = initialState, action){
     switch (action.type){
         case LOAD_COURSES:
-            return {...state, courses: [action.payload]}
+            return {...state, all: [action.payload]}
         case REMOVE_COURSES:
             return {
                 ...state,
-                courses: state.courses.filter(
+                all: state.all.filter(
+                    course => course.id !== action.payload
+                ),
+                featured: state.featured.filter(
                     course => course.id !== action.payload
                 )
             }

@@ -68,6 +68,7 @@ function ProfileButton() {
           )} */}
           <button><NavLink to={'/profile'}>Profile</NavLink></button>
           <button><NavLink to={'/settings'}>Settings</NavLink></button>
+          <button onClick={logout}>Log Out</button>
         </ul>
       )}
     </>

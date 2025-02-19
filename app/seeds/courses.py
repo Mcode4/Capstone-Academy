@@ -1,5 +1,6 @@
 from app.models import db, Course, environment, SCHEMA
 from app.models.course import Category
+from enum import Enum
 from sqlalchemy.sql import text
 
 def seed_courses():

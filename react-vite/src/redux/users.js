@@ -26,31 +26,32 @@ const removeUsers = (id) => ({
 
 export const loadAllUsers = () => async(dispatch) =>{
     const res = await fetch('/api/users')
-    console.log('RESPONSE', res)
+    // console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
-        dispatch(loadUsers(data))
+        // console.log('DATA', data)
+        // console.log('DATA222', data.users)
+        dispatch(loadUsers(data.users))
     }
     else if(res.status > 500){
         const err = await res.json()
-        console.log('ERR', err)
+        console.log('ERR FETCHING USERS', err)
     }
     else {
-        console.log('SOME WENT WRONG ON USER THUNK')
+        console.log('SOME WENT WRONG ON USERS THUNK')
     }
 }
 
-const initialState = {users : []}
+const initialState = {data : []}
 
 function userReducer(state = initialState, action){
     switch(action.type){
         case LOAD_USERS:
-            return {...state, users: action.payload}
+            return {...state, data: action.payload}
         case REMOVE_USERS:
             return {
                 ...state,
-                users: state.users.filter(
+                users: state.data.filter(
                     user => user.id !== action.payload
                 )
             }
