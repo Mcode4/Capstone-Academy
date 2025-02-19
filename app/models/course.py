@@ -26,3 +26,14 @@ class Course(db.Model):
     users = db.relationship('User', back_populates='courses')
     pages = db.relationship('Page', back_populates='courses')
     comments = db.relationship('Comment', back_populates='courses')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'ownerId': self.owner_id,
+            'name': self.name,
+            'category': self.category,
+            'description': self.description,
+            'image': self.image,
+            'rating': float(self.rating)
+        }
