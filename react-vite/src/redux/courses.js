@@ -12,11 +12,12 @@ const removeCourses = (id) => ({
 
 export const loadAllCourses = () => async(dispatch)=> {
     const res = await fetch('/api/courses')
-    console.log('RESPONSE', res)
+    // console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
-        dispatch(loadCourses(data))
+        // console.log('DATA', data)
+        // console.log('DATA@@@@', data.courses)
+        dispatch(loadCourses(data.courses))
     }
     else if(res.status > 500){
         const err = await res.json()
@@ -32,7 +33,7 @@ const initialState = {featured: [], all: []}
 function courseReducer(state = initialState, action){
     switch (action.type){
         case LOAD_COURSES:
-            return {...state, all: [action.payload]}
+            return {...state, all: action.payload}
         case REMOVE_COURSES:
             return {
                 ...state,

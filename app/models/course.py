@@ -32,7 +32,7 @@ class Course(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'name': self.name,
-            'category': self.category,
+            'category': f'{self.category.value}',
             'description': self.description,
             'image': self.image,
             'rating': float(self.rating)
