@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import { loadAllUsers } from '../redux/users'
-import { loadAllCourses } from '../redux/courses'
+import { loadAllCourses, setFeaturedCourses } from '../redux/courses'
 import Navigation from "../components/Navigation/Navigation";
 
 export default function Layout() {
@@ -14,6 +14,7 @@ export default function Layout() {
   const loadState = async () => {
     await dispatch(loadAllUsers())
     await dispatch(loadAllCourses())
+    await dispatch(setFeaturedCourses())
   }
   useEffect(() => {
     

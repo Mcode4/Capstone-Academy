@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import FeatureCourseElement from "../../FeatureCourseElement"
 
 function ProfilePage(){
     const id = useParams().id
@@ -22,10 +23,11 @@ function ProfilePage(){
                     </div>
                     {user.bio}
                 </div>
-                <div class='featured-container'>
+                {/* <div class='featured-container'>
                     @{user.username}'s Courses
                     <div class='featured-course'></div>
-                </div>
+                </div> */}
+                <FeatureCourseElement title={`@${user.username}'s Courses`} />
                 </>
             )}
         </div>

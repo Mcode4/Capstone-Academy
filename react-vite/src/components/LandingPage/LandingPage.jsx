@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import FeatureCourseElement from "../../FeatureCourseElement"
 
 function LandingPage(){
     const [firstName, setFirstName] = useState("")
@@ -50,10 +51,7 @@ function LandingPage(){
                 </div>
             </div>
 
-            <div class='featured-container'>
-                Featured Courses
-                <div class='featured-course'></div>
-            </div>
+            <FeatureCourseElement />
 
             <div class='featured-container'>
                 Top Reviews
