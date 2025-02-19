@@ -14,3 +14,12 @@ class Comment(db.Model):
 
     users = db.relationship('User', back_populates='comments')
     courses = db.relationship('Course', back_populates='comments')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'ownerId': self.owner_id,
+            'courseId': self.course_id,
+            'rating': self.rating,
+            'comment': self.comment
+        }
