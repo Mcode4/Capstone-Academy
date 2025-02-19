@@ -1,16 +1,21 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import ProfileButton from "./AccountButton";
 import "./Navigation.css";
 
 function Navigation() {
   const user = useSelector(state => state.session.user)
   const users = useSelector(state => state.users.users)
-  const courses = useSelector(state => state.courses.courses)
   const allState = useSelector(state => console.log('STATE', state))
-
-  
+  const location = useLocation().pathname.split('/')
+  if(location[1] === 'edit' || location[1] === 'create'){
+    const navbar = document.getElementById("navbar")
+    navbar.style.display = 'none'
+  } else {
+    const navbar = document.getElementById("navbar")
+    navbar.style.display = 'block'
+  }
 
   return (
     // <ul>
@@ -22,7 +27,7 @@ function Navigation() {
     //     <ProfileButton />
     //   </li>
     // </ul>
-    <div className="navbar">
+    <div id="navbar">
       <button>
         <NavLink to="/">Home</NavLink>
       </button>
@@ -34,7 +39,7 @@ function Navigation() {
       ): (
         <div className="site-actions">
           <button>Category</button>
-          <button>Create Course</button>
+          <button><NavLink to={"create"}>Create Course</NavLink></button>
           <ProfileButton />
         </div>
       )}

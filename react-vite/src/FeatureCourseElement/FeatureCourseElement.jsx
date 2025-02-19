@@ -13,19 +13,23 @@ function FeatureCourseElement({ data, title }){
                 <div class='featured-course'></div>
                 ):(
                 <div class='featured-course'>
-                    {featureCourses.map(course=> (
-                        <NavLink key={course.id}>
-                            <div className="course-owner">
-                                pfp
-                                {users[course.ownerId].first_name}{users[course.ownerId].last_name}
-                            </div>
-                            <img src={`${course.image}`} alt="" />
-                            <div className="course-info">
-                                {course.name}
-                                {course.rating}
-                            </div>
-                        </NavLink>
-                    ))}
+                    {Array.isArray(featureCourses) && featureCourses.length > 0 ? (
+                        featureCourses.map((course) => (
+                            <NavLink key={course.id} to={`/course/${course.id}`}>
+                                <div className="course-owner">
+                                    pfp
+                                    {users[course.ownerId]?.first_name} {users[course.ownerId]?.last_name}
+                                </div>
+                                <img src={`${course.image}`} alt={course.name} />
+                                <div className="course-info">
+                                    {course.name}
+                                    {course.rating}
+                                </div>
+                            </NavLink>
+                        ))
+                    ) : (
+                        <p>No featured courses available</p>
+                    )}
                 </div>
             )}
         </div>
