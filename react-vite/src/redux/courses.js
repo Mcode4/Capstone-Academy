@@ -28,6 +28,10 @@ export const loadAllCourses = () => async(dispatch)=> {
     }
 }
 
+// export const setFeatureCourses = () =>{
+
+// }
+
 const initialState = {featured: [], all: []}
 
 function courseReducer(state = initialState, action){

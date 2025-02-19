@@ -42,7 +42,7 @@ export const loadAllUsers = () => async(dispatch) =>{
     }
 }
 
-const initialState = {data : []}
+const initialState = {data : {}}
 
 function userReducer(state = initialState, action){
     switch(action.type){
