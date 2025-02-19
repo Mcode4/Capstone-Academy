@@ -9,13 +9,15 @@ function Navigation() {
   const users = useSelector(state => state.users.users)
   const allState = useSelector(state => console.log('STATE', state))
   const location = useLocation().pathname.split('/')
-  if(location[1] === 'edit' || location[1] === 'create'){
-    const navbar = document.getElementById("navbar")
-    navbar.style.display = 'none'
-  } else {
-    const navbar = document.getElementById("navbar")
-    navbar.style.display = 'block'
-  }
+  useEffect(()=>{
+    if(location[1] === 'edit' || location[1] === 'create'){
+      const navbar = document.getElementById("navbar")
+      navbar.style.display = 'none'
+    } else {
+      const navbar = document.getElementById("navbar")
+      navbar.style.display = 'block'
+    }
+  })
 
   return (
     // <ul>

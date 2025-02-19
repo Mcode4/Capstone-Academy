@@ -25,7 +25,7 @@ class Course(db.Model):
 
     users = db.relationship('User', back_populates='courses')
     # pages = db.relationship('Page', back_populates='courses')
-    # comments = db.relationship('Comment', back_populates='courses')
+    comments = db.relationship('Comment', back_populates='courses')
 
     def to_dict(self):
         return {

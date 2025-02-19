@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     bio = db.Column(db.String(250))
 
     courses = db.relationship('Course', back_populates='users')
-    # comments =  db.relationship('Comment', back_populates='users')
+    comments =  db.relationship('Comment', back_populates='users')
     # notifications = db.relationship('Notification', back_populates='users')
     
 
