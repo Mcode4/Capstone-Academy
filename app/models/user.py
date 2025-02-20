@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(25), nullable=False)
     last_name = db.Column(db.String(25), nullable=False)
     username = db.Column(db.String(25), nullable=False, unique=True)
+    image = db.Column(db.String, nullable=False)
     email = db.Column(db.String(10), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(250))
@@ -42,6 +43,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'bio': self.bio,
+            'image': self.image,
             # 'courses': self.courses,
             # 'comments': self.comments,
             # 'notifications': self.notifications

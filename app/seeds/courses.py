@@ -18,8 +18,8 @@ def seed_courses():
 
 def undo_courses():
     if environment == 'production':
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.courses RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM courses"))
     
     db.session.commit()

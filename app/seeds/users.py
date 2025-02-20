@@ -9,14 +9,16 @@ def seed_users():
         last_name='User',
         username='demo-user',
         email='demo@aa.io', 
-        password='password'
+        password='password',
+        image = 'https://media.istockphoto.com/id/1393750072/vector/flat-white-icon-man-for-web-design-silhouette-flat-illustration-vector-illustration-stock.jpg?s=612x612&w=0&k=20&c=s9hO4SpyvrDIfELozPpiB_WtzQV9KhoMUP9R9gVohoU='
     )
     demo2 = User(
         first_name='Made2',
         last_name='Collide',
         username='collide-user',
         email='collide@aa.io', 
-        password='password'
+        password='password',
+        image = 'https://media.istockphoto.com/id/1359252077/vector/reaper-in-hood-skull-portrait-cut-out-vector-icon.jpg?s=612x612&w=0&k=20&c=y0AcMDjiS_l93zkfJWnKMnx6dhnzFrXZUPC2MOa_JPQ='
     )
 
     db.session.add(demo)

@@ -2,6 +2,7 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .courses import seed_courses, undo_courses
 from .comments import seed_comments, undo_comments
+from .pages import seed_pages, undo_pages
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,9 +22,11 @@ def seed():
         undo_users()
         undo_courses()
         undo_comments()
+        undo_pages()
     seed_users()
     seed_courses()
     seed_comments()
+    seed_pages()
     # Add other seed functions here
 
 
@@ -33,4 +36,5 @@ def undo():
     undo_users()
     undo_courses()
     undo_comments()
+    undo_pages()
     # Add other undo functions here

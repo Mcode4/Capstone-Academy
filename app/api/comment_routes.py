@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from app.models import Comment, db
 from app.forms import CommentForm
 from sqlalchemy import desc
@@ -17,8 +17,12 @@ def get_user_comments(id):
 
 @comment_routes.route('/', methods=['POST'])
 def add_comment():
-    form = CommentForm
+    form = CommentForm()
+    # form.data['csrf_token'] = request.cookies['csrf_token']
+    print('\n FORM INFO: ', form.data, '\n')
+    print('\n FORM INFO: ', request.cookies['csrf_token'], '\n')
     if form.validate_on_submit():
+        print('VALIDATED')
         new = Comment(
             owner_id = form.data['owner_id'],
             course_id = form.data['course_id'],
@@ -28,4 +32,4 @@ def add_comment():
         db.session.add(new)
         db.session.commit()
         return new.to_dict()
-    return form.errors 
+    return form.errors, 400

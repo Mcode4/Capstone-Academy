@@ -75,12 +75,12 @@ function CoursePage(){
             <div className="comment-section">
                 {user && (
                     <OpenModalButton
-                        modalComponent={CommentForm}
+                        modalComponent={<CommentForm />}
                         buttonText={'Add Comment'}
                     />
                 )}
                 {comments && comments.map(comment=>(
-                    <div className="user-comment">
+                    <div className="user-comment" key={comment.id}>
                         <div className="user-comment-info">
                             user pfp
                             <a href={`/users/${comment.ownerId}`}>
