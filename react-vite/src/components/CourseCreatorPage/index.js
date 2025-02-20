@@ -1,3 +1,4 @@
-import CourseCreatorPage from "./CourseCreatorPage";
+import CourseEditorPage from './CourseEditorPage'
+import CreateCoursePage from "./CreateCoursePage"
 
-export default CourseCreatorPage
+export {CourseEditorPage, CreateCoursePage}

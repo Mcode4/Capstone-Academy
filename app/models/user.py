@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+import datetime
 
 
 class User(db.Model, UserMixin):
@@ -17,6 +18,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(10), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(250))
+    createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
+    updatedAt = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
     courses = db.relationship('Course', back_populates='users')
     comments =  db.relationship('Comment', back_populates='users')
@@ -44,6 +47,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'image': self.image,
+            'createdDate': self.createdAt,
             # 'courses': self.courses,
             # 'comments': self.comments,
             # 'notifications': self.notifications

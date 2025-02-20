@@ -51,7 +51,7 @@ function userReducer(state = initialState, action){
         case REMOVE_USERS:
             return {
                 ...state,
-                users: state.data.filter(
+                data: state.data.filter(
                     user => user.id !== action.payload
                 )
             }

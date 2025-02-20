@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from enum import Enum
+import datetime
 
 class Types(Enum):
     TEXT = "TEXT"
@@ -19,6 +20,8 @@ class PageContent(db.Model):
         content = db.Column(db.String(500), nullable=False)
     else:
         content = db.Column(db.String, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
+    updatedAt = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
         
     pages = db.relationship('Page', back_populates="page_contents")
 
