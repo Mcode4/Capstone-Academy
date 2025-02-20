@@ -1,9 +1,16 @@
-import { useState} from "react"
+import { useState, useEffect} from "react"
 
 export default function CommentForm(){
     const [comment, setComment] = useState("")
-    const [rating, setRating] = useState(null)
-    const [err, setErr] = useState("")
+    // const [rating, setRating] = useState(null)
+    // const [err, setErr] = useState("")
+    let ratingAmt
+
+    // useEffect(()=>{
+    //     if(rating){
+    //         ratingAmt = rating
+    //     }
+    // }, [rating])
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -29,10 +36,10 @@ export default function CommentForm(){
                         <button 
                             key={val}
                             type="button"
-                            style={{ color: rating >= val ? 'yellow' : 'black'}}
+                            style={{ color: ratingAmt >= val ? 'yellow' : 'black'}}
                             onClick={(e)=>{
                                 e.preventDefault()
-                                setRating(val)
+                                // setRating(val)
                             }}
                         >
                             ★
@@ -40,7 +47,7 @@ export default function CommentForm(){
                     ))}
                 </div>
             </label>
-            {err && (<p>{err}</p>)}
+            {/* {err && (<p>{err}</p>)} */}
             <button type="submit">Post</button>
         </form>
     )
