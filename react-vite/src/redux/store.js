@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import userReducer from "./users";
 import courseReducer from "./courses";
+import commentReducer from "./comments";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   users: userReducer,
-  courses: courseReducer
+  courses: courseReducer,
+  comments: commentReducer
 });
 
 let enhancer;

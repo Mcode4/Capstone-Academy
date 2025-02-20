@@ -27,7 +27,7 @@ function ProfilePage(){
                     @{user.username}'s Courses
                     <div class='featured-course'></div>
                 </div> */}
-                <FeatureCourseElement title={`@${user.username}'s Courses`} />
+                <FeatureCourseElement title={`${user.first_name}'s Courses`} />
                 </>
             )}
         </div>

@@ -11,7 +11,7 @@ def get_course_comments(id):
     return {'comments': [comment.to_dict() for comment in comments]}
 
 @comment_routes.route('/user/<int:id>')
-def get_course_comments(id):
+def get_user_comments(id):
     comments = Comment.query.filter(Comment.owner_id == id).all()
     return {'comments': [comment.to_dict() for comment in comments]}
 

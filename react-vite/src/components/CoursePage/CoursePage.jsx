@@ -1,16 +1,31 @@
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { NavLink } from "react-router-dom"
+import { loadCourseComments } from "../../redux/comments"
+import CommentForm from "./CommentForm"
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
 
 function CoursePage(){
     const id = useParams().id
     const user = useSelector(state => state.session.user)
     const users = useSelector(state => state.users.data)
+    const comments = useSelector(state => state.comments.current)
     const course = useSelector(state => state.courses.all[id])
     const [err, setErr] = useState('')
-    // console.log(course)
+    const dispatch = useDispatch()
+    console.log("COMMENTSS", comments)
+
+    useEffect(()=>{
+        const loadComments = async () => {
+            await dispatch(loadCourseComments(id))
+        }
+        if(id){
+            loadComments()
+        }
+    }, [id])
+
     useEffect(()=>{
         if(!course){
             return (
@@ -30,6 +45,7 @@ function CoursePage(){
             <h1>404 Page Not Found</h1>
         )
     }
+    
 
 
     return (
@@ -39,7 +55,7 @@ function CoursePage(){
                     pfp 
                     {users[course.ownerId].first_name} {users[course.ownerId].last_name}
                 </div>
-                {`${user.id}` === `${course.ownerId}` && (
+                {`${user?.id}` === `${course.ownerId}` && (
                     <div className="course-actions">
                         <button><NavLink to={`/edit/${course.id}`}>Edit</NavLink></button>
                         <button>Delete</button>
@@ -56,7 +72,27 @@ function CoursePage(){
                 </div>
                 {course.description}
             </div>
-            <div className="comment-section"></div>
+            <div className="comment-section">
+                {user && (
+                    <OpenModalButton
+                        modalComponent={CommentForm}
+                        buttonText={'Add Comment'}
+                    />
+                )}
+                {comments && comments.map(comment=>(
+                    <div className="user-comment">
+                        <div className="user-comment-info">
+                            user pfp
+                            <a href={`/users/${comment.ownerId}`}>
+                                @{users[comment.ownerId].username}
+                            </a>
+                            
+                        </div>
+                        {comment.comment}
+                        {comment.rating}
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

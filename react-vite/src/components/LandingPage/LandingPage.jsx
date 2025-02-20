@@ -17,16 +17,6 @@ function LandingPage(){
         navigate('/home')
     }
 
-    useEffect(()=>{
-        setRatingErr('')
-        const button = document.getElementsByClassName("rbutton")
-        for(let i=0; i< button.length; i++){
-            if(i < rating) button[i].style.color = 'yellow'
-            else button[i].style.color = 'black'
-            
-        }
-    }, [rating])
-
     const handleSubmit = async(e) => {
         e.preventDefault()
 
@@ -81,41 +71,19 @@ function LandingPage(){
                     <label htmlFor="rating-slide">
                         Rating*
                         <div className="rating-slide">
-                            <button 
-                                className="rbutton"
-                                onClick={(e)=> {
-                                    e.preventDefault()
-                                    setRating(1)
-                                }}
-                            >★</button>
-                            <button 
-                                className="rbutton"
-                                onClick={(e)=> {
-                                    e.preventDefault()
-                                    setRating(2)
-                                }}
-                            >★</button>
-                            <button 
-                                className="rbutton"
-                                onClick={(e)=> {
-                                    e.preventDefault()
-                                    setRating(3)
-                                }}
-                            >★</button>
-                            <button 
-                                className="rbutton"
-                                onClick={(e)=> {
-                                    e.preventDefault()
-                                    setRating(4)
-                                }}
-                            >★</button>
-                            <button 
-                                className="rbutton"
-                                onClick={(e)=> {
-                                    e.preventDefault()
-                                    setRating(5)
-                                }}
-                            >★</button>
+                            {[1,2,3,4,5].map(val=>(
+                                <button
+                                    key={val}
+                                    type="button"
+                                    style= {{color : rating >= val ? 'yellow' : 'black'}}
+                                    onClick={(e)=>{
+                                        e.preventDefault()
+                                        setRating(val)
+                                    }}
+                                >
+                                    ★
+                                </button>
+                            ))}
                         </div>
                     </label>
                     <br />

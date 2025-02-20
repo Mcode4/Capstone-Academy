@@ -7,6 +7,7 @@ import HomePage from '../components/HomePage/HomePage';
 import ProfilePage from '../components/ProfilePage';
 import CoursePage from '../components/CoursePage';
 import CourseCreatorPage from '../components/CourseCreatorPage';
+import { useDispatch } from 'react-redux';
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/course/:id",
-        element: <CoursePage />,
+        element: <CoursePage />
       },
       {
         path: "/users/:id",
