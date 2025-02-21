@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react"
 import { useLocation, NavLink } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { createCourseThunk } from "../../redux/courses"
 
 function CreateCoursePage(){
     const [name, setName] = useState('')
     const [category, setCategory] = useState('')
     const [image, setImage] = useState('')
     const [description, setDescription] = useState('')
+    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -17,7 +20,17 @@ function CreateCoursePage(){
             image,
             description
         })
+        const server = await dispatch(createCourseThunk({
+            owner_id: user.id,
+            name,
+            category,
+            description,
+            image
+        }))
 
+        if(server){
+            console.log('RETURN ON CREAT COURSE JSX', server)
+        }
     }
 
     return (

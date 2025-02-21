@@ -52,8 +52,10 @@ function CoursePage(){
         <div className="course-page">
             <header className="course-head">
                 <div className="user-course-info">
-                    pfp 
-                    {users[course.ownerId].first_name} {users[course.ownerId].last_name}
+                <img src={`${users[course.ownerId].image}`} alt="" />
+                    <a href={`/users/${course.ownerId}`}>
+                        {users[course.ownerId].first_name} {users[course.ownerId].last_name}
+                    </a>
                 </div>
                 {`${user?.id}` === `${course.ownerId}` && (
                     <div className="course-actions">
@@ -82,14 +84,14 @@ function CoursePage(){
                 {comments && comments.map(comment=>(
                     <div className="user-comment" key={comment.id}>
                         <div className="user-comment-info">
-                            user pfp
+                            <img src={`${users[comment.ownerId].image}`} alt="" />
                             <a href={`/users/${comment.ownerId}`}>
                                 @{users[comment.ownerId].username}
                             </a>
                             
                         </div>
                         {comment.comment}
-                        {comment.rating}
+                        ★{comment.rating}
                     </div>
                 ))}
             </div>

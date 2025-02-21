@@ -1,5 +1,6 @@
 const LOAD_COMMENTS = 'comments/loadComments'
 const POST_COMMENT = 'comments/postComment'
+// ADD A DELETE
 
 const loadComments = (comments) =>({
     type: LOAD_COMMENTS,

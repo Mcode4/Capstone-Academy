@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 
 function CourseEditorPage(){
     const courses = useSelector(state => state.courses.all)
+    const user = useSelector(state => state.session.user)
     const {id} = useParams()
 
     const handleSubmit = async(e) => {}
