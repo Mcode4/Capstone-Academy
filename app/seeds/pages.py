@@ -12,9 +12,18 @@ from sqlalchemy.sql import text
 #     db.session.add(demo2)
 #     db.session.commit()
 
+<<<<<<< HEAD
 # def undo_pages():
 #     if environment == 'production':
 #         db.session.execute(f"TRUNCATE table {SCHEMA}.pages RESTART IDENTITY CASCADE;")
 #     else:
 #         db.session.execute(text("DELETE FROM course"))
 #     db.session.commit()
+=======
+def undo_pages():
+    if environment == 'production':
+        db.session.execute(f"TRUNCATE table {SCHEMA}.pages RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM pages"))
+    db.session.commit()
+>>>>>>> dev
