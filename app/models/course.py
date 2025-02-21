@@ -27,7 +27,7 @@ class Course(db.Model):
     updatedAt = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
     users = db.relationship('User', back_populates='courses')
-    pages = db.relationship('Page', back_populates='courses')
+    # pages = db.relationship('Page', back_populates='courses')
     comments = db.relationship('Comment', back_populates='courses')
 
     def to_dict(self):
