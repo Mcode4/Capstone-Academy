@@ -59,16 +59,12 @@ export const createCourseThunk = (course) => async(dispatch) =>{
     const res = await fetch('/api/courses', {
         method: 'POST',
         header: {"Content-type": "application/json"},
-        body: JSON.stringify({
-            owner_id: course.owner_id,
-            name: course.name,
-            category: course.category,
-            description: course.description,
-            image: course.image
-        })
+        body: JSON.stringify(course)
     })
+    console.log('RES', res)
     if(res.ok){
         const data = await res.json()
+        console.log('DATA', data)
         dispatch(createCourse(data))
     }
     else if(res.status > 500){

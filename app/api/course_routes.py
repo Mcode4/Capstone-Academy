@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.models import Course, db
 from app.forms import CourseForm
+from .img_helper_funcs import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from sqlalchemy import desc
 
 course_routes = Blueprint("course", __name__)
@@ -18,20 +19,29 @@ def featured_courses():
 
 @course_routes.route('/', methods=['POST'])
 def create_course():
+    # form.data['csrf_token'] = request.cookies['csrf_token']
     form = CourseForm()
     print('\n FORM INFO: ', form.data, '\n')
-    print('\n CSRF: ', request.cookies['csrf_token'], '\n')
+    print('\n CSRF: ', request.data, '\n')
     if form.validate_on_submit():
+        image = form.data["image"]
+        image.name = get_unique_filename(image.name)
+        upload = upload_file_to_s3
+
+        if "url" not in upload:
+            return {"error": "File didn't upload please try again"}
+        
+        url = upload["url"]
         new = Course(
             owner_id = form.data['owner_id'],
             name = form.data['name'],
             category = form.data['category'],
             description = form.data['description'],
-            image = form.data['image']
+            image = url
         )
         db.session.add(new)
         db.session.commit()
-        return new.to_dict(), 200
+        return new.to_dict(), 201
     return form.errors
 
 @course_routes.route('/<int:id>')

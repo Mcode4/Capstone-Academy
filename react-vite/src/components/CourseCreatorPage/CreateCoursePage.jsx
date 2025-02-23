@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react"
-import { useLocation, NavLink } from "react-router-dom"
+import { useNavigate, NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { createCourseThunk } from "../../redux/courses"
 
 function CreateCoursePage(){
     const [name, setName] = useState('')
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('CODING')
     const [image, setImage] = useState('')
     const [description, setDescription] = useState('')
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!user){
+            return navigate('/home')
+        }
+    })
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -18,7 +25,8 @@ function CreateCoursePage(){
             name,
             category,
             image,
-            description
+            description,
+            user
         })
         const server = await dispatch(createCourseThunk({
             owner_id: user.id,
@@ -30,6 +38,15 @@ function CreateCoursePage(){
 
         if(server){
             console.log('RETURN ON CREAT COURSE JSX', server)
+        } else {
+
+            return (
+                <>
+                <h1>Course Uploaded!</h1>
+
+                <a href="">go to course</a>
+                </>
+            )
         }
     }
 
@@ -45,7 +62,9 @@ function CreateCoursePage(){
                     />
                 </label>
 
-                <select onChange={(e)=> setCategory(e.target.value)}>
+                <select 
+                    onChange={(e)=> setCategory(e.target.value)}
+                >
                     Category
                     <option value="CODING">Coding</option>
                     <option value="MATH">Math</option>
@@ -54,9 +73,15 @@ function CreateCoursePage(){
                     <option value="FUN">Fun</option>
                 </select>
 
-                <button type="file">
+                <label>
                     Add an image
-                </button>
+                    <input 
+                        type="file"
+                        accept="image/*"
+                        onChange={(e)=> setImage(e.target.files[0])}
+                        required
+                    />
+                </label>
 
                 <label>
                     Description

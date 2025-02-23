@@ -13,9 +13,11 @@ function LandingPage(){
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    if(user){
-        navigate('/home')
-    }
+    useEffect(()=>{
+        if(user){
+            navigate('/home')
+        }
+    })
 
     const handleSubmit = async(e) => {
         e.preventDefault()
