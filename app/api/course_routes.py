@@ -25,8 +25,8 @@ def get_courses_by_id(id):
 
 @course_routes.route('/', methods=['POST'])
 def create_course():
-    # form.data['csrf_token'] = request.cookies['csrf_token']
     form = CourseForm()
+    # form.data['csrf_token'] = request.cookies['csrf_token']
     print('\n FORM INFO: ', form.data, '\n')
     print('\n CSRF: ', request.data, '\n')
     if form.validate_on_submit():
