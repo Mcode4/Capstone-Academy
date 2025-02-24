@@ -1,10 +1,16 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { useEffect } from "react"
 
 
 function FeatureCourseElement({ data, title}){
     const featureCourses = useSelector(state=> state.courses.featured)
     const users = useSelector(state => state.users.data)
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(setFeaturedCourses())
+    })
 
     console.log('DATAA FOR FEATURE', data)
     return (

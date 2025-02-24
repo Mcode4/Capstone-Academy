@@ -70,7 +70,7 @@ function LandingPage(){
                         />
                     </label>
                     <br />
-                    <label htmlFor="rating-slide">
+                    {/* <label htmlFor="rating-slide">
                         Rating*
                         <div className="rating-slide">
                             {[1,2,3,4,5].map(val=>(
@@ -100,7 +100,7 @@ function LandingPage(){
                             required
                         />
                     </label>
-                    <br />
+                    <br /> */}
                     <button type="submit">Submit</button>
                 </form>
             </div>

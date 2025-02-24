@@ -7,10 +7,8 @@ from app.models.course import Category
 IMAGE_FILES = {"png", "jpg", "jpeg", "webp", "gif"}
 
 class CourseForm(FlaskForm):
-    owner_id = IntegerField(validators=[DataRequired()])
-    name = StringField(validators=[DataRequired()])
-    category = SelectField(validators=[DataRequired()],
-        choices=[(c.name, c.value) for c in Category]
-    ),
+    owner_id = IntegerField('Owner ID', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired()])
+    category = SelectField('category', validators=[DataRequired()], choices=[(c.name, c.value) for c in Category])
     description = StringField(validators=[DataRequired()])
     image = FileField(validators=[FileRequired(), FileAllowed(list(IMAGE_FILES))])

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 import { loadCourseComments } from "../../redux/comments"
+import { loadAllCourses } from "../../redux/courses"
 import CommentForm from "./CommentForm"
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
 
@@ -19,6 +20,7 @@ function CoursePage(){
 
     useEffect(()=>{
         const loadComments = async () => {
+            await dispatch(loadAllCourses())
             await dispatch(loadCourseComments(id))
         }
         if(id){

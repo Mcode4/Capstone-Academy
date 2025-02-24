@@ -1,18 +1,23 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { setFeaturedCourses } from "../../redux/courses";
 import FeatureCourseElement from "../../FeatureCourseElement"
 
-function HomePage(){
+function HomePage({ isLoaded=false }){
     const user = useSelector(state => state.session.user)
     const navigate = useNavigate()
-
-    if(!user) navigate('/')
+    
     
     return(
-        <div id="home-page">
-            <FeatureCourseElement />
-            <FeatureCourseElement />
-        </div>
+        <>
+        {isLoaded && (
+            <div id="home-page">
+                <FeatureCourseElement />
+                <FeatureCourseElement />
+            </div>
+        )}
+        </>
     )
 }
 

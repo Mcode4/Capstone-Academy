@@ -4,21 +4,14 @@ import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import { loadAllUsers } from '../redux/users'
-import { loadAllCourses, setFeaturedCourses } from '../redux/courses'
 import Navigation from "../components/Navigation/Navigation";
 
 export default function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const loadState = async () => {
-    await dispatch(loadAllUsers())
-    await dispatch(loadAllCourses())
-    await dispatch(setFeaturedCourses())
-  }
   useEffect(() => {
     
-    dispatch(thunkAuthenticate()).then(loadState()).then(() => setIsLoaded(true));
+    dispatch(thunkAuthenticate()).then(dispatch(loadAllUsers())).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
