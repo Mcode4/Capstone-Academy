@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { NavLink } from "react-router-dom"
-import { loadCourseComments } from "../../redux/comments"
+import { loadCourseComments, deleteCommentThunk } from "../../redux/comments"
 import { loadAllCourses, removeCoursesThunk } from "../../redux/courses"
 import CommentForm from "./CommentForm"
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
@@ -56,16 +56,24 @@ function CoursePage(){
         if(server){
             console.log(server)
         } 
-        // else {
-        //     navigate('/home')
-        // }
+        else {
+            navigate('/home')
+        }
+    }
+    const deleteCommentFunc = async(e, comId) => {
+        e.preventDefault()
+
+        const server = await dispatch(deleteCommentThunk(comId))
+        if(server){
+            console.log(server)
+        }
     }
 
     return (
         <div className="course-page">
             <header className="course-head">
                 <div className="user-course-info">
-                <img src={`${users[course.ownerId].image}`} alt="" />
+                <img className='medium-icon' src={`${users[course.ownerId].image}`} alt="" />
                     <a href={`/users/${course.ownerId}`}>
                         {users[course.ownerId].first_name} {users[course.ownerId].last_name}
                     </a>
@@ -78,7 +86,7 @@ function CoursePage(){
                 )}
             </header>
             <div className="course-img-container">
-                <img src={`${course.image}`} alt={course.name} />
+                <img className="fit-post" src={`${course.image}`} alt={course.name} />
             </div>
             <div className="course-full-info">
                 <div className="course-top-in">
@@ -97,14 +105,16 @@ function CoursePage(){
                 {comments && comments.map(comment=>(
                     <div className="user-comment" key={comment.id}>
                         <div className="user-comment-info">
-                            <img src={`${users[comment.ownerId].image}`} alt="" />
+                            <img className="icon" src={`${users[comment.ownerId].image}`} alt="" />
                             <a href={`/users/${comment.ownerId}`}>
                                 @{users[comment.ownerId].username}
                             </a>
                             
                         </div>
-                        {comment.comment}
                         ★{comment.rating}
+                        {comment.comment}
+                        {user?.id === comment.ownerId && (<button onClick={(e)=> deleteCommentFunc(e, comment.id)}>Delete</button>)}
+                        
                     </div>
                 ))}
             </div>

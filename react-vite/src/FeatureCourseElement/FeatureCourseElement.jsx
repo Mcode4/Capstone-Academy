@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { useEffect } from "react"
 import { setFeaturedCourses } from "../redux/courses"
+import './FeatureCourseElement.css'
 
 function FeatureCourseElement({ data, title}){
     const featureCourses = useSelector(state=> state.courses.featured)
@@ -20,9 +21,9 @@ function FeatureCourseElement({ data, title}){
                 <div class='featured-course'>
                     {Array.isArray(data) && data.length > 0 && (
                         data.map((course) => (
-                            <div key={course.id}>
+                            <div key={course.id} className="course-display">
                                 <NavLink to={`/course/${course.id}`}>
-                                    <img src={`${course.image}`} alt={course.name} />
+                                    <img className="post" src={`${course.image}`} alt={course.name} />
                                     <div className="course-info">
                                         {course.name}
                                         {course.rating}
@@ -36,13 +37,13 @@ function FeatureCourseElement({ data, title}){
                 <div class='featured-course'>
                     {Array.isArray(featureCourses) && featureCourses.length > 0 ? (
                         featureCourses.map((course) => (
-                            <div key={course.id}>
+                            <div key={course.id} className="course-display">
                                 <div className="course-owner">
-                                    <img src={`${users[course.ownerId]?.image}`} alt="" />
+                                    <img className="icon" src={`${users[course.ownerId]?.image}`} alt="" />
                                     {users[course.ownerId]?.first_name} {users[course.ownerId]?.last_name}
                                 </div>
                                 <NavLink to={`/course/${course.id}`}>
-                                    <img src={`${course.image}`} alt={course.name} />
+                                    <img className="post" src={`${course.image}`} alt={course.name} />
                                     <div className="course-info">
                                         {course.name}
                                         {course.rating}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import FeatureCourseElement from "../../FeatureCourseElement"
-
+import './LandingPage.css'
 function LandingPage(){
     // const [firstName, setFirstName] = useState("")
     // const [lastName, setLastName] = useState("")

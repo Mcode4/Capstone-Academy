@@ -1,5 +1,6 @@
 const LOAD_COMMENTS = 'comments/loadComments'
 const POST_COMMENT = 'comments/postComment'
+const DELETE_COMMENT = 'comments/deleteComment'
 // ADD A DELETE
 
 const loadComments = (comments) =>({
@@ -9,6 +10,10 @@ const loadComments = (comments) =>({
 const postComment = (comment) =>({
     type: POST_COMMENT,
     payload: comment
+})
+const deleteComment = (id) =>({
+    type: DELETE_COMMENT,
+    payload: id
 })
 
 export const loadCourseComments = (id) => async(dispatch)=>{
@@ -69,6 +74,24 @@ export const postCommentThunk = (comment) => async(dispatch)=>{
     }
 }
 
+export const deleteCommentThunk = (id) => async(dispatch) =>{
+    const res = await fetch(`/api/comments/${id}`, {
+        method: 'DELETE'
+    })
+    if(res.ok){
+        dispatch(deleteComment(id))
+    }
+    else if(res.status > 500){
+        const err = await res.json()
+        console.log('ERR DELETING USER COMMENTS', err)
+        return err
+    }
+    else {
+        console.log('SOME WENT WRONG ON DELETE COMMENTS THUNK')
+        return 'SOME WENT WRONG ON DELETE COMMENTS THUNK'
+    }
+}
+
 const initialState = { current: [] }
 
 const commentReducer = (state=initialState, action)=>{
@@ -77,6 +100,10 @@ const commentReducer = (state=initialState, action)=>{
             return { ...state, current: action.payload}
         case POST_COMMENT:
             return {...state, current: [...state.current, action.payload]}
+        case DELETE_COMMENT:
+            return {...state, current: state.current.filter(
+                course => course.id !== action.payload
+            )}
         default:
             return state
     }

@@ -18,7 +18,7 @@ def get_user_comments(id):
 @comment_routes.route('', methods=['POST'])
 def add_comment():
     form = CommentForm()
-    form.data['csrf_token'] = request.cookies['csrf_token']
+    form['csrf_token'].data = request.cookies['csrf_token']
     print('\n FORM INFO: ', request.cookies['csrf_token'], '\n')
     print('\n FORM INFO: ', form.data, '\n')
     if form.validate_on_submit():
@@ -33,3 +33,12 @@ def add_comment():
         db.session.commit()
         return new.to_dict()
     return form.errors, 400
+
+@comment_routes.route('/<int:id>', methods=['DELETE'])
+def delete_comment(id):
+    comment = Comment.query.get(id)
+    if comment is None:
+        return {"message": "comment could not be found"}, 404
+    db.session.delete(comment)
+    db.session.commit()
+    return {"message": "comment successfully deleted"}, 200
