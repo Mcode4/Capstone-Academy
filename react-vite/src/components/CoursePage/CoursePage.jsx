@@ -1,10 +1,10 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { NavLink } from "react-router-dom"
 import { loadCourseComments } from "../../redux/comments"
-import { loadAllCourses } from "../../redux/courses"
+import { loadAllCourses, removeCoursesThunk } from "../../redux/courses"
 import CommentForm from "./CommentForm"
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
 
@@ -16,6 +16,7 @@ function CoursePage(){
     const course = useSelector(state => state.courses.all[id])
     const [err, setErr] = useState('')
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     console.log("COMMENTSS", comments)
 
     useEffect(()=>{
@@ -48,7 +49,17 @@ function CoursePage(){
         )
     }
     
+    const deleteFunc = async(e) => {
+        e.preventDefault()
 
+        const server = await dispatch(removeCoursesThunk(id))
+        if(server){
+            console.log(server)
+        } 
+        // else {
+        //     navigate('/home')
+        // }
+    }
 
     return (
         <div className="course-page">
@@ -62,7 +73,7 @@ function CoursePage(){
                 {`${user?.id}` === `${course.ownerId}` && (
                     <div className="course-actions">
                         <button><NavLink to={`/edit/${course.id}`}>Edit</NavLink></button>
-                        <button>Delete</button>
+                        <button onClick={(e)=> deleteFunc(e)}>Delete</button>
                     </div>
                 )}
             </header>

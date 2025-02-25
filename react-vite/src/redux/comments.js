@@ -44,7 +44,7 @@ export const loadUserComments = (id) => async(dispatch)=>{
 export const postCommentThunk = (comment) => async(dispatch)=>{
     const res = await fetch('/api/comments', {
         method: 'POST',
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-type": "application/json" },
         body: JSON.stringify({
             owner_id: comment.owner_id,
             course_id: comment.course_id,

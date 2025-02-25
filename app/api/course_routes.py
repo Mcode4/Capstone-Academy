@@ -52,3 +52,41 @@ def create_course():
         return new.to_dict(), 201
     return form.errors, 400
 
+@course_routes.route('/edit/<int:id>', methods=['PUT', 'PATCH'])
+def edit_course(id):
+    course = Course.query.get(id)
+    if course is None:
+        return {"message": "Course not found"}, 404
+    form = CourseForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    print('\n FORM INFO: ', form.data, '\n')
+    if form.validate_on_submit():
+        remove_file_from_s3(course.image)
+        new_image = form.data['image']
+        new_image.filename = get_unique_filename(new_image.filename)
+        upload = upload_file_to_s3(new_image)
+        print('\n UPLOAD', upload, '\n')
+        
+        if "url" not in upload:
+            return {"error": "Failed to upload new image"}, 500
+        
+        for key, val in form.data.items():
+            if(hasattr(course, key) and val != None):
+                setattr(course, key, val)
+        course.image = upload["url"]
+        
+        db.session.add(course)
+        db.session.commit()
+        return course.to_dict(), 200
+    return form.errors, 400
+
+@course_routes.route('/<int:id>', methods=['DELETE'])
+def delete_course(id):
+    course = Course.query.get(id)
+    print('\n COURSE INFO: ', course, '\n')
+    if course is None:
+        return {"message": "Course not found"}, 404
+    db.session.delete(course)
+    db.session.commit()
+    return {"message": "course successfully deleted"}, 200
+    

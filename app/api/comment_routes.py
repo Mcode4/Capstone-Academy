@@ -18,9 +18,9 @@ def get_user_comments(id):
 @comment_routes.route('', methods=['POST'])
 def add_comment():
     form = CommentForm()
-    # form.data['csrf_token'] = request.cookies['csrf_token']
-    print('\n FORM INFO: ', form.data, '\n')
+    form.data['csrf_token'] = request.cookies['csrf_token']
     print('\n FORM INFO: ', request.cookies['csrf_token'], '\n')
+    print('\n FORM INFO: ', form.data, '\n')
     if form.validate_on_submit():
         print('VALIDATED')
         new = Comment(
