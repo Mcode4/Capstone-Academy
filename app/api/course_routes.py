@@ -23,16 +23,17 @@ def get_courses_by_id(id):
     courses = Course.query.filter(Course.owner_id == id).all()
     return {"courses": [course.to_dict() for course in courses]}
 
-@course_routes.route('/', methods=['POST'])
+@course_routes.route('', methods=['POST'])
 def create_course():
     form = CourseForm()
-    # form.data['csrf_token'] = request.cookies['csrf_token']
+    form['csrf_token'].data = request.cookies['csrf_token']
     print('\n FORM INFO: ', form.data, '\n')
     print('\n CSRF: ', request.data, '\n')
     if form.validate_on_submit():
         image = form.data["image"]
-        image.name = get_unique_filename(image.name)
-        upload = upload_file_to_s3
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print('\n UPLOAD', upload, '\n')
 
         if "url" not in upload:
             return {"error": "File didn't upload please try again"}
@@ -43,9 +44,11 @@ def create_course():
             name = form.data['name'],
             category = form.data['category'],
             description = form.data['description'],
-            image = url
+            image = url,
+            rating = 0
         )
         db.session.add(new)
         db.session.commit()
         return new.to_dict(), 201
-    return form.errors
+    return form.errors, 400
+

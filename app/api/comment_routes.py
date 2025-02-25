@@ -15,7 +15,7 @@ def get_user_comments(id):
     comments = Comment.query.filter(Comment.owner_id == id).all()
     return {'comments': [comment.to_dict() for comment in comments]}
 
-@comment_routes.route('/', methods=['POST'])
+@comment_routes.route('', methods=['POST'])
 def add_comment():
     form = CommentForm()
     # form.data['csrf_token'] = request.cookies['csrf_token']

@@ -58,8 +58,7 @@ export const setFeaturedCourses = () => async(dispatch) =>{
 export const createCourseThunk = (course) => async(dispatch) =>{
     const res = await fetch('/api/courses', {
         method: 'POST',
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(course)
+        body: course
     })
     console.log('RES', res)
     if(res.ok){

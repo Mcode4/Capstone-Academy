@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { useEffect } from "react"
-
+import { setFeaturedCourses } from "../redux/courses"
 
 function FeatureCourseElement({ data, title}){
     const featureCourses = useSelector(state=> state.courses.featured)

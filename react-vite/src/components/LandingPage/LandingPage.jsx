@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom"
 import FeatureCourseElement from "../../FeatureCourseElement"
 
 function LandingPage(){
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [review, setReview] = useState("")
-    const [rating, setRating] = useState(null)
-    const [ratingErr, setRatingErr] = useState()
+    // const [firstName, setFirstName] = useState("")
+    // const [lastName, setLastName] = useState("")
+    // const [review, setReview] = useState("")
+    // const [rating, setRating] = useState(null)
+    // const [ratingErr, setRatingErr] = useState()
     const user = useSelector(state => state.session.user)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     useEffect(()=>{
         if(user){
@@ -19,18 +19,18 @@ function LandingPage(){
         }
     })
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
+    // const handleSubmit = async(e) => {
+    //     e.preventDefault()
 
-        if(!rating) return setRatingErr('Must give a rating')
-        console.log({
-            firstName,
-            lastName,
-            review,
-            rating
-        })
+    //     if(!rating) return setRatingErr('Must give a rating')
+    //     console.log({
+    //         firstName,
+    //         lastName,
+    //         review,
+    //         rating
+    //     })
 
-    }
+    // }
 
     return (
         <div id="landing-page">
@@ -45,12 +45,12 @@ function LandingPage(){
 
             <FeatureCourseElement />
 
-            <div class='featured-container'>
+            {/* <div class='featured-container'>
                 Top Reviews
                 <div class='featured-reviews'></div>
-            </div>
+            </div> */}
 
-            <div class='review-form'>
+            {/* <div class='review-form'>
                 <form onSubmit={(e)=> handleSubmit(e)}>
                     <label>
                         First Name*
@@ -70,7 +70,7 @@ function LandingPage(){
                         />
                     </label>
                     <br />
-                    {/* <label htmlFor="rating-slide">
+                    <label htmlFor="rating-slide">
                         Rating*
                         <div className="rating-slide">
                             {[1,2,3,4,5].map(val=>(
@@ -100,10 +100,10 @@ function LandingPage(){
                             required
                         />
                     </label>
-                    <br /> */}
+                    <br />
                     <button type="submit">Submit</button>
                 </form>
-            </div>
+            </div> */}
         </div>
     )
 }

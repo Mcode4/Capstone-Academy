@@ -21,20 +21,13 @@ function CreateCoursePage(){
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        console.log({
-            name,
-            category,
-            image,
-            description,
-            user
-        })
-        const server = await dispatch(createCourseThunk({
-            owner_id: user.id,
-            name,
-            category,
-            description,
-            image
-        }))
+        const formData = new FormData()
+        formData.append('owner_id', user.id)
+        formData.append('category', category)
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('image', image)
+        const server = await dispatch(createCourseThunk(formData))
 
         if(server){
             console.log('RETURN ON CREAT COURSE JSX', server)
