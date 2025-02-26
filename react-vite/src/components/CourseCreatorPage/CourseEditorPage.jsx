@@ -13,6 +13,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
     const [category, setCategory] = useState(course?.category)
     const [image, setImage] = useState(course?.image)
     const [description, setDescription] = useState(course?.description)
+    const [err, setErr] = useState({})
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -22,6 +23,18 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setErr({})
+
+        if(name.length > 50){
+            return setErr({
+                name: "Name must be 50 characters or less"
+            })
+        }
+        if(description.length > 250){
+            return setErr({
+                description: `Description must be 250 characters are less. You have ${description.length}`
+            })
+        }
 
         const formData = new FormData()
         formData.append('owner_id', user.id)
@@ -68,7 +81,8 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                             onChange={(e)=> setName(e.target.value)}
                         />
                     </label>
-
+                    {err.name && (<p>{err.name}</p>)}
+                    <br />
                     <select 
                         onChange={(e)=> setCategory(e.target.value)}
                     >
@@ -79,7 +93,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                         <option value="LANGUAGE">Language</option>
                         <option value="FUN">Fun</option>
                     </select>
-
+                    <br />
                     <label>
                         Add an image
                         <input 
@@ -89,7 +103,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                             required
                         />
                     </label>
-
+                    <br />
                     <label>
                         Description
                         <input 
@@ -98,6 +112,8 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                             onChange={(e)=>setDescription(e.target.value)}
                         />
                     </label>
+                    {err.description && (<p>{err.description}</p>)}
+                    <br />
                     <button type="submit">Continue</button>
                 </form>
                 <button><NavLink to={'/'}>Back to Home</NavLink></button>

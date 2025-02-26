@@ -8,6 +8,7 @@ function CreateCoursePage(){
     const [category, setCategory] = useState('CODING')
     const [image, setImage] = useState('')
     const [description, setDescription] = useState('')
+    const [err, setErr] = useState({})
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,6 +21,19 @@ function CreateCoursePage(){
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setErr({})
+
+        if(name.length > 50){
+            return setErr({
+                name: "Name must be 50 characters or less"
+            })
+        }
+        if(description.length > 250){
+            return setErr({
+                description: `Description must be 250 characters are less. You have ${description.length}`
+            })
+        }
+
 
         const formData = new FormData()
         formData.append('owner_id', user.id)
@@ -32,14 +46,7 @@ function CreateCoursePage(){
         if(server){
             console.log('RETURN ON CREAT COURSE JSX', server)
         } else {
-
-            return (
-                <>
-                <h1>Course Uploaded!</h1>
-
-                <a href="">go to course</a>
-                </>
-            )
+            navigate('/home')
         }
     }
 
@@ -56,6 +63,7 @@ function CreateCoursePage(){
                             onChange={(e)=> setName(e.target.value)}
                         />
                     </label>
+                    {err.name && (<p>{err.name}</p>)}
                     <br />
                     <select 
                         onChange={(e)=> setCategory(e.target.value)}
@@ -86,6 +94,7 @@ function CreateCoursePage(){
                             onChange={(e)=>setDescription(e.target.value)}
                         />
                     </label>
+                    {err.description && (<p>{err.description}</p>)}
                     <br />
                     <button type="submit">Continue</button>
                 </form>
