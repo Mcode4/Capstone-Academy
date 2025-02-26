@@ -27,6 +27,27 @@ function SignupFormPage() {
           "Confirm Password field must be the same as the Password field",
       });
     }
+    if(firstName.length > 25){
+      return setErrors({
+        firstName : "First Name must be 25 characters or less"
+      })
+    }
+    if(lastName.length > 25){
+      return setErrors({
+        lastName : "Last Name must be 25 characters or less"
+      })
+    }
+    if(username.length > 25){
+      return setErrors({
+        username : "Username must be 25 characters or less"
+      })
+    }
+    if(email.length > 50){
+      return setErrors({
+        email : "Email must be 50 characters or less"
+      })
+    }
+
 
     const serverResponse = await dispatch(
       thunkSignup({
@@ -60,6 +81,8 @@ function SignupFormPage() {
             required
           />
         </label>
+        {errors.firstName && <p>{errors.firstName}</p>}
+        <br />
         <label>
           Last Name
           <input
@@ -69,6 +92,8 @@ function SignupFormPage() {
             required
           />
         </label>
+        {errors.lastName && <p>{errors.lastName}</p>}
+        <br />
         <label>
           Email
           <input
