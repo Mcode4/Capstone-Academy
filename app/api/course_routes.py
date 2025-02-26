@@ -45,7 +45,7 @@ def create_course():
             category = form.data['category'],
             description = form.data['description'],
             image = url,
-            rating = 0
+            # rating = 0
         )
         db.session.add(new)
         db.session.commit()

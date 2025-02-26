@@ -1,8 +1,8 @@
 """all tables
 
-Revision ID: 150c2ad66a96
+Revision ID: cc21e1bcfc61
 Revises: 
-Create Date: 2025-02-20 21:14:33.802467
+Create Date: 2025-02-25 22:40:00.889653
 
 """
 from alembic import op
@@ -12,8 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
 # revision identifiers, used by Alembic.
-revision = '150c2ad66a96'
+revision = 'cc21e1bcfc61'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -43,7 +44,6 @@ def upgrade():
     sa.Column('category', sa.Enum('CODING', 'MATH', 'SCIENCE', 'LANGUAGE', 'FUN', name='category'), nullable=False),
     sa.Column('description', sa.String(length=250), nullable=False),
     sa.Column('image', sa.String(), nullable=False),
-    sa.Column('rating', sa.Numeric(precision=1, scale=2), nullable=False),
     sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),

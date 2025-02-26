@@ -26,7 +26,7 @@ function FeatureCourseElement({ data, title}){
                                     <img className="post" src={`${course.image}`} alt={course.name} />
                                     <div className="course-info">
                                         {course.name}
-                                        {course.rating}
+                                        {/* {course.rating} */}
                                     </div>
                                 </NavLink>
                             </div>
@@ -46,7 +46,7 @@ function FeatureCourseElement({ data, title}){
                                     <img className="post" src={`${course.image}`} alt={course.name} />
                                     <div className="course-info">
                                         {course.name}
-                                        {course.rating}
+                                        {/* {course.rating} */}
                                     </div>
                                 </NavLink>
                             </div>

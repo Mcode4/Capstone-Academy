@@ -91,7 +91,7 @@ function CoursePage(){
             <div className="course-full-info">
                 <div className="course-top-in">
                     {course.name}
-                    {course.rating}
+                    {/* {course.rating} */}
                 </div>
                 {course.description}
             </div>
