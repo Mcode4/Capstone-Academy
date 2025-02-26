@@ -41,7 +41,7 @@ function SignupFormPage() {
   };
 
   return (
-    <>
+    <div className="form-page">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
@@ -55,6 +55,7 @@ function SignupFormPage() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
+        <br />
         <label>
           Username
           <input
@@ -65,6 +66,7 @@ function SignupFormPage() {
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
+        <br />
         <label>
           Password
           <input
@@ -75,6 +77,7 @@ function SignupFormPage() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
+        <br />
         <label>
           Confirm Password
           <input
@@ -85,9 +88,10 @@ function SignupFormPage() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        <br />
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

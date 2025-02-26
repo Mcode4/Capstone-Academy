@@ -44,50 +44,55 @@ function CreateCoursePage(){
     }
 
     return (
-        <div className="create-course-page">
-            <form onSubmit={(e)=> handleSubmit(e)}>
-                <label>
-                    Course Name
-                    <input 
-                        type="text" 
-                        value={name}
-                        onChange={(e)=> setName(e.target.value)}
-                    />
-                </label>
-
-                <select 
-                    onChange={(e)=> setCategory(e.target.value)}
-                >
-                    Category
-                    <option value="CODING">Coding</option>
-                    <option value="MATH">Math</option>
-                    <option value="SCIENCE">Science</option>
-                    <option value="LANGUAGE">Language</option>
-                    <option value="FUN">Fun</option>
-                </select>
-
-                <label>
-                    Add an image
-                    <input 
-                        type="file"
-                        accept="image/*"
-                        onChange={(e)=> setImage(e.target.files[0])}
-                        required
-                    />
-                </label>
-
-                <label>
-                    Description
-                    <input 
-                        type="text" 
-                        value={description}
-                        onChange={(e)=>setDescription(e.target.value)}
-                    />
-                </label>
-                <button type="submit">Continue</button>
-            </form>
-            <button><NavLink to={'/'}>Back to Home</NavLink></button>
+        <div className="form-page">
+            <h1>Create a Course</h1>
+            <div className="create-course-page">
+                <form onSubmit={(e)=> handleSubmit(e)}>
+                    <label>
+                        Course Name
+                        <input 
+                            type="text" 
+                            value={name}
+                            onChange={(e)=> setName(e.target.value)}
+                        />
+                    </label>
+                    <br />
+                    <select 
+                        onChange={(e)=> setCategory(e.target.value)}
+                    >
+                        Category
+                        <option value="CODING">Coding</option>
+                        <option value="MATH">Math</option>
+                        <option value="SCIENCE">Science</option>
+                        <option value="LANGUAGE">Language</option>
+                        <option value="FUN">Fun</option>
+                    </select>
+                    <br />
+                    <label>
+                        Add an image
+                        <input 
+                            type="file"
+                            accept="image/*"
+                            onChange={(e)=> setImage(e.target.files[0])}
+                            required
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Description
+                        <input 
+                            type="text" 
+                            value={description}
+                            onChange={(e)=>setDescription(e.target.value)}
+                        />
+                    </label>
+                    <br />
+                    <button type="submit">Continue</button>
+                </form>
+                <button><NavLink to={'/'}>Back to Home</NavLink></button>
+            </div>
         </div>
+        
     )
 }
 

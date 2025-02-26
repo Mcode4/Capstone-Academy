@@ -39,7 +39,8 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
     }
 
     return (
-        <>
+        <div className='form-page'>
+            <h1>Edit your Course</h1>
         {isFinished ? (
             <div className="course-editor-page">
                 <header className="creator-nav">
@@ -102,7 +103,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                 <button><NavLink to={'/'}>Back to Home</NavLink></button>
             </div>
         )}
-        </>
+        </div>
     )
 }
 
