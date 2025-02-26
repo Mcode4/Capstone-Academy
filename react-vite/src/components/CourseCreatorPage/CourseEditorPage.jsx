@@ -34,14 +34,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
         if(server){
             console.log('RETURN ON CREAT COURSE JSX', server)
         } else {
-
-            return (
-                <>
-                <h1>Course Uploaded!</h1>
-
-                <a href="">go to course</a>
-                </>
-            )
+            navigate(`/course/${id}`)
         }
     }
 

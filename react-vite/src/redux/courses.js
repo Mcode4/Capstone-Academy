@@ -118,7 +118,7 @@ export const removeCoursesThunk = (id) => async(dispatch) =>{
 }
 
 
-const initialState = {featured: {}, all: {}}
+const initialState = {featured: [], all: {}}
 
 function courseReducer(state = initialState, action){
     switch (action.type){
@@ -139,8 +139,12 @@ function courseReducer(state = initialState, action){
         case CREATE_COURSE:
             return {...state, all: {...state.all, [action.payload.id]: action.payload}}
         case EDIT_COURSE:
+
             return {...state, 
-                all: state.all.map(course => course.id === action.payload.id ? action.payload : course),
+                all: {
+                    ...state.all,
+                    [action.payload.id]: action.payload
+                },
                 featured: state.featured.map(course => course.id === action.payload.id ? action.payload : course)
             }
         default:

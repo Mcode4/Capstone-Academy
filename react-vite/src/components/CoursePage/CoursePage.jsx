@@ -13,7 +13,7 @@ function CoursePage(){
     const user = useSelector(state => state.session.user)
     const users = useSelector(state => state.users.data)
     const comments = useSelector(state => state.comments.current)
-    const course = useSelector(state => state.courses.all[id])
+    const course = useSelector(state => state.courses.all)[id]
     const [err, setErr] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
