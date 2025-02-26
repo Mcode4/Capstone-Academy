@@ -10,7 +10,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     course_id = db.Column(db.ForeignKey(add_prefix_for_prod('courses.id')), nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
+    # rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(125), nullable=False)
     createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
     updatedAt = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
@@ -23,7 +23,7 @@ class Comment(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'courseId': self.course_id,
-            'rating': self.rating,
+            # 'rating': self.rating,
             'comment': self.comment,
             'createdDate': self.createdAt,
         }

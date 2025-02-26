@@ -4,12 +4,61 @@
 
 #navbar{
   display: flex;
-  padding: 10px;
   align-items: center;
+  background-color: gray;
+  height: 50px;
+  padding: 2px;
 }
 .right-nav{
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
   gap: 10px;
+  height: 100%;
+}
+
+#navbar > button {
+  display: flex;
+  height: 100%;
+  width: 30vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: aliceblue;
+}
+
+.NavLink {
+  display: flex;
+  height: 100%;
+  width: 30vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.NavLink:hover{
+  background-color: darkgray;
+}
+
+.nav-button{
+  display: flex;
+  height: 100%;
+  width: 30vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: aliceblue;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.two{
+  cursor: default;
+}
+
+.nav-button:hover{
+  background-color: darkgray;
 }

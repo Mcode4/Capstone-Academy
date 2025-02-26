@@ -98,7 +98,7 @@ function CoursePage(){
             <div className="comment-section">
                 {user && (
                     <OpenModalButton
-                        modalComponent={<CommentForm />}
+                        modalComponent={<CommentForm title={course.name} />}
                         buttonText={'Add Comment'}
                     />
                 )}
@@ -108,13 +108,15 @@ function CoursePage(){
                             <img className="icon" src={`${users[comment.ownerId].image}`} alt="" />
                             <a href={`/users/${comment.ownerId}`}>
                                 @{users[comment.ownerId].username}
+                                
                             </a>
+                            <div className="inner-comment">
+                                {comment.comment}
+                                {user?.id === comment.ownerId && (<button onClick={(e)=> deleteCommentFunc(e, comment.id)}>Delete</button>)}
+                            </div>
                             
                         </div>
-                        ★{comment.rating}
-                        {comment.comment}
-                        {user?.id === comment.ownerId && (<button onClick={(e)=> deleteCommentFunc(e, comment.id)}>Delete</button>)}
-                        
+                        {/* ★{comment.rating} */}
                     </div>
                 ))}
             </div>

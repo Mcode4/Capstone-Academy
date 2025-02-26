@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { postCommentThunk } from "../../redux/comments"
 import { useParams } from "react-router-dom"
 
-export default function CommentForm(){
+export default function CommentForm({title}){
     const [comment, setComment] = useState("")
-    const [rating, setRating] = useState(null)
+    // const [rating, setRating] = useState(null)
     const [err, setErr] = useState("")
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
@@ -14,14 +14,14 @@ export default function CommentForm(){
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        if(!rating){
-            return setErr("Must have a rating")
-        }
+        // if(!rating){
+        //     return setErr("Must have a rating")
+        // }
 
         const serverResponse = await dispatch(postCommentThunk({
             owner_id: user.id,
             course_id: id,
-            rating,
+            // rating,
             comment
         }))
 
@@ -32,15 +32,19 @@ export default function CommentForm(){
 
     return (
         <form onSubmit={(e)=>handleSubmit(e)}>
+            {title && ( 
+                <div>Leave a comment on {title}</div>
+            )}
             <label>
                 <input 
                     type="text"
+                    placeholder="Add a comment"
                     value={comment}
                     onChange={(e)=> setComment(e.target.value)}
                     required
                 />
             </label>
-            <label>
+            {/* <label>
                 Rating*
                 <div className="rating-holder">
                     {[1,2,3,4,5].map(val=>(
@@ -57,7 +61,7 @@ export default function CommentForm(){
                         </button>
                     ))}
                 </div>
-            </label>
+            </label> */}
             {err && (<p style={{ color: 'red'}}>{err}</p>)}
             <button type="submit">Post</button>
         </form>

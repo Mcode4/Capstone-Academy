@@ -26,7 +26,7 @@ def add_comment():
         new = Comment(
             owner_id = form.data['owner_id'],
             course_id = form.data['course_id'],
-            rating = form.data['rating'],
+            # rating = form.data['rating'],
             comment = form.data['comment']
         )
         db.session.add(new)

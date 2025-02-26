@@ -11,7 +11,7 @@ function FeatureCourseElement({ data, title}){
 
     useEffect(()=>{
         dispatch(setFeaturedCourses())
-    }, [])
+    }, [dispatch])
 
     console.log('DATAA FOR FEATURE', data)
     return (

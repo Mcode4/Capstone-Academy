@@ -1,4 +1,7 @@
 /* TODO: Add sitewide styles */
+body{
+    margin: 0%;
+}
 .icon{
     height: 25px;
     width: 25px;
@@ -19,4 +22,8 @@
 .fit-post{
     height: 90vh;
     width: 200vh
+}
+
+button{
+    cursor: pointer;
 }

@@ -7,13 +7,13 @@ def seed_comments():
         owner_id = 2,
         course_id = 1,
         comment = 'Sux',
-        rating = 1
+        # rating = 1
     )
     demo2 = Comment(
         owner_id = 1,
         course_id = 1,
         comment = 'Agreed',
-        rating = 2
+        # rating = 2
     )
 
     db.session.add(demo)

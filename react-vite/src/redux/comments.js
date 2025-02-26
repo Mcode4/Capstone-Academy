@@ -53,7 +53,7 @@ export const postCommentThunk = (comment) => async(dispatch)=>{
         body: JSON.stringify({
             owner_id: comment.owner_id,
             course_id: comment.course_id,
-            rating: comment.rating,
+            // rating: comment.rating,
             comment: comment.comment
         })
     })
