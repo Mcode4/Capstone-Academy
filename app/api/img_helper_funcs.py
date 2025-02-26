@@ -3,7 +3,7 @@ import uuid
 import boto3
 
 BUCKET_NAME = os.environ.get("S3_BUCKET")
-S3_LOCATION = f'https://{BUCKET_NAME}.s3.amazonaws.com'
+S3_LOCATION = f'https://{BUCKET_NAME}.s3.us-east-1.amazonaws.com'
 
 s3 = boto3.client(
     "s3",
@@ -31,7 +31,7 @@ def upload_file_to_s3(file, acl="public-read"):
         print('\n full error: ', e, '\n')
         return {"errors": str(e)}
     
-    return {"url": f'{S3_LOCATION}{file.filename}'}
+    return {"url": f'{S3_LOCATION}/{file.filename}'}
 
 
 def remove_file_from_s3(image_url):
