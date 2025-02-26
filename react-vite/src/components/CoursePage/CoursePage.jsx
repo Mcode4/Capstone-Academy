@@ -7,6 +7,7 @@ import { loadCourseComments, deleteCommentThunk } from "../../redux/comments"
 import { loadAllCourses, removeCoursesThunk } from "../../redux/courses"
 import CommentForm from "./CommentForm"
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
+import './CoursePage.css'
 
 function CoursePage(){
     const id = useParams().id
@@ -71,29 +72,32 @@ function CoursePage(){
 
     return (
         <div className="course-page">
-            <header className="course-head">
-                <div className="user-course-info">
-                <img className='medium-icon' src={`${users[course.ownerId].image}`} alt="" />
-                    <a href={`/users/${course.ownerId}`}>
-                        {users[course.ownerId].first_name} {users[course.ownerId].last_name}
-                    </a>
-                </div>
-                {`${user?.id}` === `${course.ownerId}` && (
-                    <div className="course-actions">
-                        <button><NavLink to={`/edit/${course.id}`}>Edit</NavLink></button>
-                        <button onClick={(e)=> deleteFunc(e)}>Delete</button>
+            <div className="course-content">
+                <header className="course-head">
+                    <div className="user-course-info">
+                        <img className='medium-icon' src={`${users[course.ownerId].image}`} alt="" />
+                        <a href={`/users/${course.ownerId}`}>
+                            {users[course.ownerId].first_name} {users[course.ownerId].last_name}
+                        </a>
                     </div>
-                )}
-            </header>
-            <div className="course-img-container">
-                <img className="fit-post" src={`${course.image}`} alt={course.name} />
-            </div>
-            <div className="course-full-info">
-                <div className="course-top-in">
-                    {course.name}
-                    {/* {course.rating} */}
+                    {`${user?.id}` === `${course.ownerId}` && (
+                        <div className="course-actions">
+                            <button><NavLink to={`/edit/${course.id}`}>Edit</NavLink></button>
+                            <button onClick={(e)=> deleteFunc(e)}>Delete</button>
+                        </div>
+                    )}
+                </header>
+                <br />
+                <div className="course-img-container">
+                    <img className="fit-post" src={`${course.image}`} alt={course.name} />
                 </div>
-                {course.description}
+                <div className="course-full-info">
+                    <div className="course-top-in">
+                        <h1 className="title-name">{course.name}</h1>
+                        {/* {course.rating} */}
+                    </div>
+                    {course.description}
+                </div>
             </div>
             <div className="comment-section">
                 {user && (
