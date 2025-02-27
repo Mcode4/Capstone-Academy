@@ -71,9 +71,12 @@ export const createCourseThunk = (course) => async(dispatch) =>{
     else if(res.status > 500){
         const err = await res.json()
         console.log('ERR FETCHING FEATURED COURSES', err)
+        return err
     }
     else {
         console.log('SOME WENT WRONG ON FEATURED COURSES THUNK')
+        const err = await res.json()
+        return err
     }
 }
 
