@@ -92,6 +92,7 @@ function CreateCoursePage(){
                             type="text" 
                             value={description}
                             onChange={(e)=>setDescription(e.target.value)}
+                            required
                         />
                     </label>
                     {err.description && (<p>{err.description}</p>)}
