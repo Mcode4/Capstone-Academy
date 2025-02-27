@@ -78,6 +78,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                         <input 
                             type="text" 
                             value={name}
+                            required
                             onChange={(e)=> setName(e.target.value)}
                         />
                     </label>
@@ -109,6 +110,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                         <input 
                             type="text" 
                             value={description}
+                            required
                             onChange={(e)=>setDescription(e.target.value)}
                         />
                     </label>
