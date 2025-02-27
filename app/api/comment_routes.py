@@ -31,7 +31,7 @@ def add_comment():
         )
         db.session.add(new)
         db.session.commit()
-        return new.to_dict()
+        return new.to_dict(), 201
     return form.errors, 400
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
