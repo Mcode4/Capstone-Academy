@@ -8,8 +8,8 @@ class SiteReview(db.Model):
         __table_args__ = {"schema" : SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50))
+    first_name = db.Column(db.String(25), nullable=False)
+    last_name = db.Column(db.String(25))
     rating = db.Column(db.Integer, nullable=False)
     review = db.Column(db.String(125), nullable=False)
 

@@ -73,7 +73,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
             <div className="course-editor-page">
                 <form onSubmit={(e)=> handleSubmit(e)}>
                     <label>
-                        Course Name
+                        Course Name*
                         <input 
                             type="text" 
                             value={name}
@@ -86,7 +86,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                     <select 
                         onChange={(e)=> setCategory(e.target.value)}
                     >
-                        Category
+                        Category*
                         <option value="CODING">Coding</option>
                         <option value="MATH">Math</option>
                         <option value="SCIENCE">Science</option>
@@ -95,7 +95,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                     </select>
                     <br />
                     <label>
-                        Add an image
+                        Add an image*
                         <input 
                             type="file"
                             accept="image/*"
@@ -105,7 +105,7 @@ function CourseEditorPage({ isFinished=false, isLoaded=false }){
                     </label>
                     <br />
                     <label>
-                        Description
+                        Description*
                         <input 
                             type="text" 
                             value={description}

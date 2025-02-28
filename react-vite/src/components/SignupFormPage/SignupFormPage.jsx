@@ -73,7 +73,7 @@ function SignupFormPage() {
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
       <label>
-          First Name
+          First Name*
           <input
             type="text"
             value={firstName}
@@ -89,13 +89,12 @@ function SignupFormPage() {
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            required
           />
         </label>
         {errors.lastName && <p>{errors.lastName}</p>}
         <br />
         <label>
-          Email
+          Email*
           <input
             type="text"
             value={email}
@@ -106,7 +105,7 @@ function SignupFormPage() {
         {errors.email && <p>{errors.email}</p>}
         <br />
         <label>
-          Username
+          Username*
           <input
             type="text"
             value={username}
@@ -117,7 +116,7 @@ function SignupFormPage() {
         {errors.username && <p>{errors.username}</p>}
         <br />
         <label>
-          Password
+          Password*
           <input
             type="password"
             value={password}
@@ -128,7 +127,7 @@ function SignupFormPage() {
         {errors.password && <p>{errors.password}</p>}
         <br />
         <label>
-          Confirm Password
+          Confirm Password*
           <input
             type="password"
             value={confirmPassword}

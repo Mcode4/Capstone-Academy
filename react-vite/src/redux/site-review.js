@@ -18,7 +18,7 @@ export const loadTopThunk = () => async(dispatch) =>{
         console.log('DATTAAA', data)
         dispatch(loadTopReviews(data.siteReviews))
     }
-    else if(res.status > 500){
+    else if(res.status < 500){
         const err = await res.json()
         console.log('ERR FETCHING REMOVE COURSES', err)
         return err
@@ -41,7 +41,7 @@ export const postReviewThunk = (review) => async(dispatch) =>{
         console.log('DATTAAA', data)
         dispatch(postReview(data.siteReview))
     }
-    else if(res.status > 500){
+    else if(res.status < 500){
         const err = await res.json()
         console.log('ERR FETCHING REMOVE COURSES', err)
         return err

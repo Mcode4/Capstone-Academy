@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import FeatureCourseElement from "../../FeatureCourseElement"
 import './HomePage.css'
 
@@ -9,6 +9,12 @@ function HomePage(){
     const user = useSelector(state => state.session.user)
     const courseObj = useSelector(state => state.courses.all)
     let loadData = useLoaderData()
+    const categoryLocate = useLocation().pathname.split('/category/')[1]
+    let catName
+
+    if(categoryLocate){
+        catName = `${categoryLocate[0].toUpperCase()}${categoryLocate.slice(1).toLowerCase()}`
+    }
 
     if(typeof loadData.courses === 'object'){
         console.log('TRRRRUUUUEUEEEEEE', loadData)
@@ -27,7 +33,7 @@ function HomePage(){
         <div id="home-page">
             <FeatureCourseElement />
             <label>
-                <h2>All Courses</h2>
+                {catName ? (<h2>All {catName} Courses</h2>):(<h2>All Courses</h2>)}
                 <div className="all-course-display">
                     {loadData[0] === 'error' ? (
                         <p>{loadData[1]}</p>

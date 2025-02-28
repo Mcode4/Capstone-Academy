@@ -9,7 +9,6 @@ function LandingPage(){
     const [lastName, setLastName] = useState("")
     const [review, setReview] = useState("")
     const [rating, setRating] = useState(null)
-    const [ratingErr, setRatingErr] = useState()
     const [submitted, setSubmitted] = useState(false)
     const [err, setErr] = useState({})
     const user = useSelector(state => state.session.user)
@@ -26,12 +25,32 @@ function LandingPage(){
     useEffect(()=>{
         dispatch(loadTopThunk())
     },[submitted])
+    // useEffect(()=>{
+    //     dispatch(loadTopThunk())
+    // },[])
 
     const handleSubmit = async(e) => {
         setErr({})
         e.preventDefault()
 
-        if(!rating) return setRatingErr('Must give a rating')
+        if(!rating) return setErr({rating: 'Must give a rating'})
+
+        if(firstName.length > 25){
+            return setErr({
+                firstName: 'First Name must have 25 characters or less'
+            })
+        }
+        if(lastName.length > 25){
+            return setErr({
+                lastName: 'Last Name must have 25 characters or less'
+            })
+        }
+        if(review.length > 125){
+            return setErr({
+                review: 'Review must have 125 characters or less'
+            })
+        }
+        
         const reviewObj = {
             first_name: firstName,
             last_name: lastName,
@@ -63,11 +82,11 @@ function LandingPage(){
             <div class='featured-container'>
                 <h2>Top Reviews</h2>
                 <div class='featured-reviews'>
-                    {reviews.map(review=>(
-                        <div className="rev-container" key={review.id}>
-                            <div>{review.firstName} {review.lastName}</div>
-                            <h1 style={{color: 'yellow'}}>{review.rating}★</h1>
-                            {review.review}
+                    {reviews.map(reviewIt=>(
+                        <div className="rev-container" key={reviewIt.id}>
+                            <div>{reviewIt.firstName} {reviewIt.lastName}</div>
+                            <h1 style={{color: 'yellow'}}>{reviewIt.rating}★</h1>
+                            {reviewIt.review}
                         </div>
                     ))}
                 </div>
@@ -86,6 +105,7 @@ function LandingPage(){
                                 onChange={(e)=> setFirstName(e.target.value)}
                                 required
                             />
+                            {err.firstName && (<p>{err.firstName}</p>)}
                             Last Name
                             <input 
                                 placeholder="Last Name"
@@ -93,6 +113,7 @@ function LandingPage(){
                                 value={lastName}
                                 onChange={(e)=> setLastName(e.target.value)}
                             />
+                            {err.lastName && (<p>{err.lastName}</p>)}
                         </label>
                         <br />
                         <label htmlFor="rating-slide">
@@ -114,7 +135,7 @@ function LandingPage(){
                             </div>
                         </label>
                         <br />
-                        {ratingErr && (<><p style={{color: 'red'}}>{ratingErr}</p><br /></>)}
+                        {err.rating && (<><p>{err.rating}</p><br /></>)}
                         <label>
                             Review*
                             <input 
@@ -125,6 +146,7 @@ function LandingPage(){
                                 required
                             />
                         </label>
+                        {err.review && (<p>{err.review}</p>)}
                         <br />
                         <button type="submit">Submit</button>
                     </form>

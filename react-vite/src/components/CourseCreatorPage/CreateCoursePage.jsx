@@ -63,7 +63,7 @@ function CreateCoursePage(){
             <div className="create-course-page">
                 <form onSubmit={(e)=> handleSubmit(e)}>
                     <label>
-                        Course Name
+                        Course Name*
                         <input 
                             type="text" 
                             value={name}
@@ -76,7 +76,7 @@ function CreateCoursePage(){
                     <select 
                         onChange={(e)=> setCategory(e.target.value)}
                     >
-                        Category
+                        Category*
                         <option value="CODING">Coding</option>
                         <option value="MATH">Math</option>
                         <option value="SCIENCE">Science</option>
@@ -85,7 +85,7 @@ function CreateCoursePage(){
                     </select>
                     <br />
                     <label>
-                        Add an image
+                        Add an image*
                         <input 
                             type="file"
                             accept="image/*"
@@ -95,7 +95,7 @@ function CreateCoursePage(){
                     </label>
                     <br />
                     <label>
-                        Description
+                        Description*
                         <input 
                             type="text" 
                             value={description}
