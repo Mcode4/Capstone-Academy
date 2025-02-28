@@ -10,13 +10,15 @@ import userReducer from "./users";
 import courseReducer from "./courses";
 import commentReducer from "./comments";
 import pageReducer from "./pages";
+import siteReviewReducer from "./site-review";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   users: userReducer,
   courses: courseReducer,
   comments: commentReducer,
-  pages: pageReducer
+  pages: pageReducer,
+  siteReviews: siteReviewReducer
 });
 
 let enhancer;

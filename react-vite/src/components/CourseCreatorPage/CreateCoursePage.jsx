@@ -21,6 +21,7 @@ function CreateCoursePage(){
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        e.stopPropagation()
         setErr({})
 
         if(name.length > 50){

@@ -4,8 +4,6 @@ const SET_FEATURED = 'courses/setFeatured'
 const CREATE_COURSE = 'courses/createCourse'
 const EDIT_COURSE = 'courses/editCourse'
 
-//FIX DELETE COURSE REDUCER
-
 const loadCourses = (courses) =>({
     type: LOAD_COURSES,
     payload: courses

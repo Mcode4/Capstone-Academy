@@ -1,3 +1,7 @@
+#landing-page{
+    padding: 10px
+}
+
 .header{
     display: flex;
     flex-direction: column;
@@ -13,4 +17,24 @@
 .header1 > div{
     margin: auto;
     text-align: center;
+}
+.featured-reviews{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    width: fit-content;
+    height: fit-content;
+    gap: 10px;
+}
+
+.rev-container{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+    height: fit-content;
 }

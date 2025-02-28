@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import FeatureCourseElement from "../../FeatureCourseElement"
+import { loadTopThunk, postReviewThunk } from "../../redux/site-review"
 import './LandingPage.css'
 function LandingPage(){
     const [firstName, setFirstName] = useState("")
@@ -10,9 +11,11 @@ function LandingPage(){
     const [rating, setRating] = useState(null)
     const [ratingErr, setRatingErr] = useState()
     const [submitted, setSubmitted] = useState(false)
+    const [err, setErr] = useState({})
     const user = useSelector(state => state.session.user)
+    const reviews = useSelector(state => state.siteReviews.reviews)
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         if(user){
@@ -20,17 +23,28 @@ function LandingPage(){
         }
     }, [user])
 
+    useEffect(()=>{
+        dispatch(loadTopThunk())
+    },[submitted])
+
     const handleSubmit = async(e) => {
+        setErr({})
         e.preventDefault()
 
         if(!rating) return setRatingErr('Must give a rating')
-        console.log({
-            firstName,
-            lastName,
+        const reviewObj = {
+            first_name: firstName,
+            last_name: lastName,
             review,
             rating
-        })
-
+        }
+        const server = await dispatch(postReviewThunk(reviewObj))
+        if(server){
+            console.log('RETURN ON CREAT COURSE JSX', server)
+            setErr(server)
+        } else {
+            setSubmitted(true)
+        }
     }
 
     return (
@@ -47,13 +61,22 @@ function LandingPage(){
             <FeatureCourseElement />
 
             <div class='featured-container'>
-                Top Reviews
-                <div class='featured-reviews'></div>
+                <h2>Top Reviews</h2>
+                <div class='featured-reviews'>
+                    {reviews.map(review=>(
+                        <div className="rev-container" key={review.id}>
+                            <div>{review.firstName} {review.lastName}</div>
+                            <h1 style={{color: 'yellow'}}>{review.rating}★</h1>
+                            {review.review}
+                        </div>
+                    ))}
+                </div>
             </div>
 
             {!submitted ?(
                 <div class='review-form'>
-                    <form className='form-page' onSubmit={(e)=> handleSubmit(e)}>
+                    <form className='form-page' onSubmit={handleSubmit}>
+                        {err.server && (<p>{err.server}</p>)}
                         <label>
                             First Name*
                             <input 

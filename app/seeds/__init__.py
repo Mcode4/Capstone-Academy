@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .courses import seed_courses, undo_courses
 from .comments import seed_comments, undo_comments
 # from .pages import seed_pages, undo_pages
+from .site_reviews import seed_site_reviews, undo_site_reviews
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,10 +24,12 @@ def seed():
         undo_courses()
         undo_comments()
         # undo_pages()
+        undo_site_reviews()
     seed_users()
     seed_courses()
     seed_comments()
     # seed_pages()
+    seed_site_reviews()
     # Add other seed functions here
 
 
@@ -37,4 +40,5 @@ def undo():
     undo_courses()
     undo_comments()
     # undo_pages()
+    undo_site_reviews()
     # Add other undo functions here
