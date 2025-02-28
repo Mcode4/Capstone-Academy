@@ -1,12 +1,13 @@
 from flask import Blueprint, request
 from app.models import Course, db
 from app.forms import CourseForm
+from app.models.course import Category
 from .img_helper_funcs import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from sqlalchemy import desc
 
 course_routes = Blueprint("course", __name__)
 
-@course_routes.route('/')
+@course_routes.route('')
 def get_courses():
     # courses = Course.query.options(joinedload(Course.users), joinedload(Course.pages), joinedload(Course.comments)).all()
     courses = Course.query.all()
@@ -14,14 +15,39 @@ def get_courses():
 
 @course_routes.route('/featured')
 def featured_courses():
-    courses = Course.query.order_by(desc(Course.name)).limit(10).all()
+    courses = Course.query.order_by(desc(Course.name)).limit(4).all()
     return {"courses": [course.to_dict() for course in courses]}
 
 @course_routes.route('/<int:id>')
-def get_courses_by_id(id):
+def get_courses_by_owner_id(id):
     # courses = Course.query.options(joinedload(Course.users), joinedload(Course.pages), joinedload(Course.comments)).all()
     courses = Course.query.filter(Course.owner_id == id).all()
-    return {"courses": {course.id : course.to_dict() for course in courses}}
+    return {"courses": [course.to_dict() for course in courses]}
+
+@course_routes.route('/category/<id>')
+def get_courses_by_category(id):
+    # courses = Course.query.options(joinedload(Course.users), joinedload(Course.pages), joinedload(Course.comments)).all()
+    print(f'\n ID COMING IN: {id} \n')
+    catergor = None
+    if id == 'coding':
+        catergor = Category.CODING
+    if id == 'math':
+        catergor = Category.MATH
+    if id == 'science':
+        catergor = Category.SCIENCE
+    if id == 'language':
+        catergor = Category.LANGUAGE
+    if id == 'fun':
+        catergor = Category.FUN
+
+    print(f'\n CATERGORY AFTER CHECK: {catergor} \n')
+
+    if catergor is not None:
+        courses = Course.query.filter(Course.category == catergor).all()
+        print(f'\n Courses: {courses} \n')
+        if courses:
+            return {"courses": [course.to_dict() for course in courses]}, 200 
+    return {"message": "Category not found"}, 404
 
 @course_routes.route('', methods=['POST'])
 def create_course():

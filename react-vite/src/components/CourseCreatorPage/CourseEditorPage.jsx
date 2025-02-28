@@ -3,7 +3,6 @@ import { useParams, NavLink, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { editCourseThunk, loadAllCourses } from "../../redux/courses"
 
-
 function CourseEditorPage({ isFinished=false, isLoaded=false }){
     const {id} = useParams()
     const course = useSelector(state => state.courses.all)[id]

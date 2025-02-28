@@ -1,35 +1,17 @@
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
-import FeatureCourseElement from "../../FeatureCourseElement"
+import { NavLink } from "react-router-dom"
+import { useLoaderData } from "react-router-dom"
+import './ProfilePage.css'
 
 function ProfilePage(isLoaded=false){
     const id = useParams().id
     const users = useSelector(state => state.users.data)
-    // console.log('ID', id)
+    const loadData = useLoaderData()
     const user = users[id]
-    let courses
-
-    useEffect(()=>{
-        userCourses().then(()=>{
-            isLoaded=true
-        }).then(()=> console.log('COURSESSSS LOADEDD', courses))
-    }, [])
-
-    const userCourses = async()=>{
-        const res = await fetch(`/api/courses/${id}`)
-        console.log('POINT 1: ', res)
-        if(res.ok){
-            const data = await res.json()
-            console.log('POINT 2: ', data.courses)
-            // if(data.courses.length === 0){
-            //     return courses = ['No Courses Made']
-            // }
-            return courses = data.courses
-        } else {
-            console.log('ERRRRRR WITH USER COURSES')
-        }
-    }
+    console.log('LOAD DATA', loadData)
+    console.log('LOAD DATA @@@@222222', loadData.length)
     return (
         <div id="profile-page">
             {!user ? (
@@ -37,25 +19,44 @@ function ProfilePage(isLoaded=false){
             ):(
                 <>
                 <div className="user-display">
+                    <img className="large-icon" src={`${user.image}`} alt="" />
                     <div className="display-info">
-                        <img src={`${user.image}`} alt="" />
                         <div className="display-names">
-                            {user.first_name} {user.last_name}
-                            @{user.username}
+                            <h3>{user.first_name} {user.last_name}</h3>
+                            <div>@{user.username}</div>
                         </div>
+                        <p className="bio">{user.bio} Bio</p>
                     </div>
-                    {user.bio}
+                    
                 </div>
                 {/* <div class='featured-container'>
                     @{user.username}'s Courses
                     <div class='featured-course'></div>
                 </div> */}
-                {isLoaded && courses && (
-                    <FeatureCourseElement 
-                        title={`${user.first_name}'s Courses`}
-                        data={courses}
-                    />
-                )}
+                <label>
+                    <h2>{user.first_name}'s Courses</h2>
+                    <div className="all-course-display">
+                        {loadData[0] === 'error' ? (
+                            <p>{loadData[1]}</p>
+                        ): loadData.length !== 0 ? (
+                            <>
+                            {loadData.map(course=>(
+                                <div key={course.id} className="course-display-2">
+                                    <NavLink to={`/course/${course.id}`}>
+                                        <img className="post" src={`${course.image}`} alt={course.name} />
+                                        <div className="course-info">
+                                            {course.name}
+                                            {/* {course.rating} */}
+                                        </div>
+                                    </NavLink>
+                                </div>
+                            ))}
+                            </>
+                        ) : (
+                            <p>No courses for user</p>
+                        )}
+                    </div>
+                </label>
                 </>
             )}
         </div>

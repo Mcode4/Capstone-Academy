@@ -70,6 +70,9 @@ function CoursePage(){
         }
     }
 
+    const upperCased = (word) => {
+        return `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`
+    }
     return (
         <div className="course-page">
             <div className="course-content">
@@ -82,8 +85,8 @@ function CoursePage(){
                     </div>
                     {`${user?.id}` === `${course.ownerId}` && (
                         <div className="course-actions">
-                            <button><NavLink to={`/edit/${course.id}`}>Edit</NavLink></button>
-                            <button onClick={(e)=> deleteFunc(e)}>Delete</button>
+                            <NavLink to={`/edit/${course.id}`}><button>Edit</button></NavLink>
+                            <a style={{backgroundColor:'red'}}><button onClick={(e)=> deleteFunc(e)} style={{color:'aliceblue'}}>Delete</button></a>
                         </div>
                     )}
                 </header>
@@ -92,9 +95,10 @@ function CoursePage(){
                     <img className="fit-post" src={`${course.image}`} alt={course.name} />
                 </div>
                 <div className="course-full-info">
-                    <div className="course-top-in">
+                    <div className="course-top-info">
                         <h1 className="title-name">{course.name}</h1>
                         {/* {course.rating} */}
+                        <h2>Category: {upperCased(course.category)}</h2>
                     </div>
                     {course.description}
                 </div>
@@ -110,7 +114,7 @@ function CoursePage(){
                     <div className="user-comment" key={comment.id}>
                         <div className="user-comment-info">
                             <img className="icon" src={`${users[comment.ownerId].image}`} alt="" />
-                            <a href={`/users/${comment.ownerId}`}>
+                            <a style={{color: 'blue', textDecoration: 'underline'}} href={`/users/${comment.ownerId}`}>
                                 @{users[comment.ownerId].username}
                                 
                             </a>

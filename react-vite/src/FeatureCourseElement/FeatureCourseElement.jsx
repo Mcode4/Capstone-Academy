@@ -16,7 +16,7 @@ function FeatureCourseElement({ data, title}){
     console.log('DATAA FOR FEATURE', data)
     return (
         <div class='featured-container'>
-            {title ? title : 'Featured Courses'}
+            {title ? (<h2>{title}</h2>) : (<h2>Featured Courses</h2>)}
             {data ? (
                 <div class='featured-course'>
                     {Array.isArray(data) && data.length > 0 && (

@@ -6,3 +6,4 @@ from .comment import Comment
 # from .pages import Page
 # from .page_content import PageContent
 # from .notification import Notification
+from .site_reviews import SiteReview

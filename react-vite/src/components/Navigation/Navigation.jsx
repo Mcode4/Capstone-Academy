@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useSelector, useDispatch} from "react-redux";
 import { NavLink, useLocation, useNavigate} from "react-router-dom";
 import { thunkLogout } from "../../redux/session";
-import ProfileButton from "./AccountButton";
+import CategoryMenu from "./CategoryMenu";
 import "./Navigation.css";
 
 function Navigation() {
-  const [listShown, setListShown] = useState(false)
   const user = useSelector(state => state.session.user)
   const location = useLocation().pathname.split('/')
   const navigate = useNavigate()
@@ -22,11 +21,6 @@ function Navigation() {
       navbar.style.display = 'flex'
     }
   }, [location])
-
-  const toggleList = (e) => {
-    e.stopPropagation()
-    setListShown(!listShown)
-  }
 
   const logout = (e) => {
     e.preventDefault();
@@ -55,28 +49,7 @@ function Navigation() {
           </>
         ): (
           <>
-            <div className="category-container">
-              <div className="nav-button" onClick={(e)=> toggleList(e)}>
-                Categories
-              </div>
-              <ul style={{display : listShown ? 'block' : 'none'}}>
-                  <li>
-                    <NavLink>Coding</NavLink>
-                  </li>
-                  <li>
-                    <NavLink>Math</NavLink>
-                  </li>
-                  <li>
-                    <NavLink>Science</NavLink>
-                  </li>
-                  <li>
-                    <NavLink>Language</NavLink>
-                  </li>
-                  <li>
-                    <NavLink>Fun</NavLink>
-                  </li>
-              </ul>
-            </div>
+            <CategoryMenu />
             <NavLink className="NavLink" to={"create"}>Create Course</NavLink>
             <div  className="nav-button two">
             <button onClick={logout} style={{backgroundColor : 'red', color : 'aliceblue', border: 'none'}}>Log Out</button>

@@ -4,6 +4,8 @@ const SET_FEATURED = 'courses/setFeatured'
 const CREATE_COURSE = 'courses/createCourse'
 const EDIT_COURSE = 'courses/editCourse'
 
+//FIX DELETE COURSE REDUCER
+
 const loadCourses = (courses) =>({
     type: LOAD_COURSES,
     payload: courses
@@ -132,8 +134,8 @@ function courseReducer(state = initialState, action){
         case REMOVE_COURSES:
             return {
                 ...state,
-                all: state.all.filter(
-                    course => course.id !== action.payload
+                all: Object.key(state.all).filter(
+                    course => course !== action.payload
                 ),
                 featured: state.featured.filter(
                     course => course.id !== action.payload

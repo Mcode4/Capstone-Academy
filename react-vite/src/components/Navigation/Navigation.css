@@ -62,3 +62,29 @@
 .nav-button:hover{
   background-color: darkgray;
 }
+
+.category-menu{
+  position:relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  z-index: 9999;
+  background-color: gray;
+  border-radius: 10px;
+  border: 2px solid aliceblue;
+  margin-top: 10px;
+  
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  width: fit-content;
+  
+}
+.category-menu > a{
+  display: flex;
+  padding: 10px;
+  color: aliceblue;
+}
+.category-menu > a:hover{
+  background-color: darkgray;
+  cursor: pointer;
+}

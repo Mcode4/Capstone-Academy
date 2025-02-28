@@ -1,0 +1,14 @@
+#home-page{
+    padding: 10px;
+}
+
+.all-course-display{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.course-display-2{
+    display: flex;
+    height: 200px;
+    width: 300px;
+    align-items: center;
+}
