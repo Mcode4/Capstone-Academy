@@ -109,7 +109,7 @@ def edit_course(id):
 @course_routes.route('/<int:id>', methods=['DELETE'])
 def delete_course(id):
     course = Course.query.get(id)
-    print('\n COURSE INFO: ', course, '\n')
+    print('\n COURSE INFO: ', course.to_dict(), '\n')
     if course is None:
         return {"message": "Course not found"}, 404
     db.session.delete(course)

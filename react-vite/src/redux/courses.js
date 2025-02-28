@@ -134,7 +134,7 @@ function courseReducer(state = initialState, action){
         case REMOVE_COURSES:
             return {
                 ...state,
-                all: Object.key(state.all).filter(
+                all: Object.keys(state.all).filter(
                     course => course !== action.payload
                 ),
                 featured: state.featured.filter(
