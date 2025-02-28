@@ -22,7 +22,11 @@ function CreateCoursePage(){
     const handleSubmit = async(e) => {
         e.preventDefault()
         e.stopPropagation()
+
         setErr({})
+
+        const body = document.getElementById('root')
+        body.style.pointerEvents = 'none'
 
         if(name.length > 50){
             return setErr({
@@ -46,7 +50,9 @@ function CreateCoursePage(){
 
         if(server){
             console.log('RETURN ON CREAT COURSE JSX', server)
+            body.style.pointerEvents = 'auto'
         } else {
+            body.style.pointerEvents = 'auto'
             navigate('/home')
         }
     }
