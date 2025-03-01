@@ -81,7 +81,7 @@ function LandingPage(){
                 </div>
                 <div className="header2">
                     <h3>STUDY AT YOUR OWN PACE</h3>
-                    <img src="../.././public/images/coverImage2.png" alt="" />
+                    <img src="../.././dist/images/coverImage2.png" alt="" />
                 </div>
             </div>
 

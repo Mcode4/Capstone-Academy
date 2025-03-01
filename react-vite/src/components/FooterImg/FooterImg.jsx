@@ -15,7 +15,7 @@ function FooterImg(){
     console.log('FOOTER LOCATION', locations)
     return (
         <div id="footer-img" className={classToggle}>
-            <img src="../.././public/images/footerImg2.png" alt="" />
+            <img src="../.././dist/images/footerImg2.png" alt="" />
         </div>
     )
 }
