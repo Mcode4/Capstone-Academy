@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import FeatureCourseElement from "../../FeatureCourseElement"
 import { loadTopThunk, postReviewThunk } from "../../redux/site-review"
 import './LandingPage.css'
+
 function LandingPage(){
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -69,15 +70,22 @@ function LandingPage(){
     return (
         <div id="landing-page">
 
-            <div class='header1'>
-                <h1>Welcome to Capstone Academy</h1>
-                <div className="head-info1">
-                    A text-based learning site made for users to learn and share skills.
-                    Have an account? <a style={{color: 'blue', textDecoration: 'underline'}} href="login">Login here</a> or <a style={{color: 'blue', textDecoration: 'underline'}} href="signup">Sign up</a>
+            <div className="header-container">
+                <div class='header1'>
+                    <h1>Welcome to Capstone Academy</h1>
+                    <div className="head-info1">
+                        A text-based learning site made for users to learn and share skills.
+                        Have an account? <a style={{color: 'blue', textDecoration: 'underline'}} href="login">Login here</a> or <a style={{color: 'blue', textDecoration: 'underline'}} href="signup">Sign up</a>
+                    </div>
+                    <NavLink to={'/home'} className='btn btn-outline-primary btn-lg'>Explore Courses</NavLink>
+                </div>
+                <div className="header2">
+                    <h3>STUDY AT YOUR OWN PACE</h3>
+                    <img src="../.././public/images/coverImage2.png" alt="" />
                 </div>
             </div>
 
-            <FeatureCourseElement />
+            {/* <FeatureCourseElement /> */}
 
             <div class='featured-container'>
                 <h2>Top Reviews</h2>
@@ -95,33 +103,15 @@ function LandingPage(){
             {!submitted ?(
                 <div class='review-form'>
                     <form className='form-page' onSubmit={handleSubmit}>
+                        <h2>Submit a Review</h2>
                         {err.server && (<p>{err.server}</p>)}
                         <label>
-                            First Name*
-                            <input 
-                                placeholder="First Name"
-                                type="text" 
-                                value={firstName}
-                                onChange={(e)=> setFirstName(e.target.value)}
-                                required
-                            />
-                            {err.firstName && (<p>{err.firstName}</p>)}
-                            Last Name
-                            <input 
-                                placeholder="Last Name"
-                                type="text" 
-                                value={lastName}
-                                onChange={(e)=> setLastName(e.target.value)}
-                            />
-                            {err.lastName && (<p>{err.lastName}</p>)}
-                        </label>
-                        <br />
-                        <label htmlFor="rating-slide">
-                            Rating*
-                            <div className="rating-slide">
+                            <br/>
+                            <div className="btn-group" role="group" aria-label="rating">
                                 {[1,2,3,4,5].map(val=>(
                                     <button
                                         key={val}
+                                        className="btn btn-outline-info"
                                         type="button"
                                         style= {{color : rating >= val ? 'yellow' : 'black'}}
                                         onClick={(e)=>{
@@ -134,25 +124,50 @@ function LandingPage(){
                                 ))}
                             </div>
                         </label>
-                        <br />
                         {err.rating && (<><p>{err.rating}</p><br /></>)}
-                        <label>
-                            Review*
-                            <input 
-                                placeholder="Review"
-                                type="text" 
-                                value={review}
-                                onChange={(e)=> setReview(e.target.value)}
-                                required
-                            />
-                        </label>
+                        <br />
+                        <div className="row">
+                            <div className="col">
+                                <input 
+                                    placeholder="First Name"
+                                    className="form-control"
+                                    type="text" 
+                                    value={firstName}
+                                    onChange={(e)=> setFirstName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="col">
+                                <input 
+                                    placeholder="Last Name"
+                                    className="form-control"
+                                    type="text" 
+                                    value={lastName}
+                                    onChange={(e)=> setLastName(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        {err.firstName && (<p>{err.firstName}</p>)}
+                        {err.lastName && (<p>{err.lastName}</p>)}
+                        
+                        <br />
+                        <textarea
+                            className="form-control form-control-lg"
+                            placeholder="Review"
+                            rows='3'
+                            value={review}
+                            onChange={(e)=> setReview(e.target.value)}
+                            required
+                        ></textarea>
                         {err.review && (<p>{err.review}</p>)}
                         <br />
                         <button type="submit">Submit</button>
                     </form>
                 </div>
             ):(
-                <p>Thank you! Your review was submitted</p>
+                <div className="alert alert-primary" role="alert">
+                    Thank you! Your review was submitted
+                </div>
             )}
         </div>
     )

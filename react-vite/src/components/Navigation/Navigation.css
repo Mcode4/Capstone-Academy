@@ -5,9 +5,9 @@
 #navbar{
   display: flex;
   align-items: center;
-  background-color: gray;
   height: 50px;
   padding: 2px;
+  margin-top: 5px;
 }
 .right-nav{
   display: flex;
@@ -38,9 +38,13 @@
   text-decoration: none;
 }
 
-.NavLink:hover{
-  background-color: darkgray;
-}
+.NavLink  > img {
+  position: relative;
+  z-index: 99;
+  width: 100%;
+  object-fit: cover;
+} 
+
 
 .nav-button{
   display: flex;

@@ -40,12 +40,14 @@ function Navigation() {
     //   </li>
     // </ul>
     <div id="navbar">
-      <NavLink className="NavLink" to={home}>Home</NavLink>
+      <NavLink className="NavLink" to={'/'}>
+        <img src="../.././public/images/caLogo1t.png" alt="" />
+      </NavLink>
       <div className="right-nav">
         {!user ? (
           <>
-            <NavLink className="NavLink" to={'login'}>Log in</NavLink>
-            <NavLink className="NavLink" to={'signup'}>Sign up</NavLink>
+            <NavLink className="btn btn-primary" to={'login'}>Log in</NavLink>
+            <NavLink className="btn btn-primary" to={'signup'}>Sign up</NavLink>
           </>
         ): (
           <>

@@ -5,6 +5,7 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import { loadAllUsers } from '../redux/users'
 import Navigation from "../components/Navigation/Navigation";
+import FooterImg from "../components/FooterImg";
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function Layout() {
         <Navigation />
         {isLoaded && <Outlet />}
         <Modal />
+        <FooterImg />
       </ModalProvider>
     </>
   );

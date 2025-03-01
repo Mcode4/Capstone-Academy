@@ -1,4 +1,6 @@
 /* TODO: Add sitewide styles */
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
 body{
     margin: 0%;
 }
@@ -44,10 +46,10 @@ button{
     margin-top: 20px;
     color: aliceblue;
 }
-input{
+/* input{
     width: 100%;
     border-radius: 10px;
-}
+} */
 
 a{
     cursor: pointer;

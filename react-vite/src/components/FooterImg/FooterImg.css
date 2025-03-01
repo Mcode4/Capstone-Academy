@@ -1,0 +1,23 @@
+#footer-img{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+}
+
+#footer-img > img {
+    position: absolute;
+    z-index: -99;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+}
+
+.offf{
+    display: none
+}
+.onn{
+    display: block;
+}
