@@ -41,7 +41,7 @@ function Navigation() {
     // </ul>
     <div id="navbar">
       <NavLink className="NavLink" to={'/'}>
-        <img src="../.././dist/images/caLogo1t.png" alt="" />
+        <img src="../.././public/images/caLogo1t.png" alt="" />
       </NavLink>
       <div className="right-nav">
         {!user ? (
