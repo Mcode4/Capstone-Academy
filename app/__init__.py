@@ -93,11 +93,11 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
     if path == '/public/images/caLogo1t.png':
-        return app.send_from_directory('public', 'caLogo1t.png')
+        return app.send_from_directory('public/images', 'caLogo1t.png')
     if path == '/public/images/footerImg2.png':
-        return app.send_from_directory('public', 'footerImg2.png')
+        return app.send_from_directory('public/images', 'footerImg2.png')
     if path == '/public/images/coverImage2.png':
-        return app.send_from_directory('public', 'coverImage2.png')
+        return app.send_from_directory('public/images', 'coverImage2.png')
     
     return app.send_static_file('index.html')
 
