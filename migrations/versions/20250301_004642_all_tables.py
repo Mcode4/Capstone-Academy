@@ -1,8 +1,8 @@
 """all tables
 
-Revision ID: b8df86122645
+Revision ID: f3bc031959ce
 Revises: 
-Create Date: 2025-02-28 11:43:30.053993
+Create Date: 2025-03-01 00:46:42.675666
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'b8df86122645'
+revision = 'f3bc031959ce'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,6 +28,7 @@ def upgrade():
     sa.Column('last_name', sa.String(length=25), nullable=True),
     sa.Column('rating', sa.Integer(), nullable=False),
     sa.Column('review', sa.String(length=125), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',

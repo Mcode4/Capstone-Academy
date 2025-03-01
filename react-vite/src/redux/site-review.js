@@ -61,7 +61,7 @@ function siteReviewReducer(state=initialState, action){
         case POST_REVIEW:
             let check = false
             const updatedReviews = state.reviews.map(review =>{
-                if(!check && review.rating < action.payload.rating){
+                if(!check && review.rating <= action.payload.rating){
                     check = true
                     return action.payload
                 }

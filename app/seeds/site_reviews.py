@@ -6,7 +6,7 @@ def seed_site_reviews():
         first_name = 'M',
         last_name = 'Armstrong',
         review = 'Had fun making it',
-        rating = 5
+        rating = 6
     )
 
     db.session.add(demo)

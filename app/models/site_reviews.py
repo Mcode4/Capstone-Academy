@@ -12,6 +12,7 @@ class SiteReview(db.Model):
     last_name = db.Column(db.String(25))
     rating = db.Column(db.Integer, nullable=False)
     review = db.Column(db.String(125), nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def to_dict(self):
         return {
@@ -20,4 +21,5 @@ class SiteReview(db.Model):
             "lastName": self.last_name,
             "rating": self.rating,
             "review": self.review,
+            "createdAt": self.createdAt,
         }

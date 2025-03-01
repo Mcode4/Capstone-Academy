@@ -161,7 +161,9 @@ function LandingPage(){
                         ></textarea>
                         {err.review && (<p>{err.review}</p>)}
                         <br />
-                        <button type="submit">Submit</button>
+                        <button className="btn btn-primary btn-lg" type="submit">
+                            Submit
+                        </button>
                     </form>
                 </div>
             ):(

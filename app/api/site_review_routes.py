@@ -12,7 +12,7 @@ def get_all_reviews():
 
 @site_review_routes.route('/highest')
 def get_highest_reviews():
-    site_reviews = SiteReview.query.order_by(desc(SiteReview.rating)).limit(4).all()
+    site_reviews = SiteReview.query.order_by(desc(SiteReview.rating), desc(SiteReview.createdAt)).limit(8).all()
     return {"siteReviews": [review.to_dict() for review in site_reviews]}, 200
 
 @site_review_routes.route('', methods=["POST"])
