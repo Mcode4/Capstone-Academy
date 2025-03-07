@@ -11,7 +11,7 @@ ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 ENV SECRET_KEY=ecc43f8120bd14d05889397de8275b03
 ENV DATABASE_URL=postgresql://my_db_bsxp_user:oA7glqSlMMeI3D5Xtue1f2AjsGHLaGWg@dpg-cuproetumphs73eamvpg-a/my_db_bsxp
-ENV SCHEMA=
+ENV SCHEMA=capstone_flask
 
 
 COPY requirements.txt .
