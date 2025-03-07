@@ -58,6 +58,7 @@ function LoginFormPage() {
           <input
             type="text"
             value={email}
+            class="form-control"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -69,15 +70,16 @@ function LoginFormPage() {
           <input
             type="password"
             value={password}
+            class="form-control"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
         <br />
-        <button type="submit">Log In</button>
+        <button className='btn btn-primary btn-lg down' type="submit">Log In</button>
         <br />
-        <button onClick={(e)=> demoLogin(e)}>Demo Login</button>
+        <button className='btn btn-primary down' onClick={(e)=> demoLogin(e)}>Demo Login</button>
       </form>
     </div>
   );

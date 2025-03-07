@@ -67,16 +67,19 @@ function CreateCoursePage(){
                         <input 
                             type="text" 
                             value={name}
+                            class="form-control"
                             onChange={(e)=> setName(e.target.value)}
                             required
                         />
                     </label>
                     {err.name && (<p>{err.name}</p>)}
                     <br />
+                    Category*
                     <select 
                         onChange={(e)=> setCategory(e.target.value)}
+                        class="form-control"
                     >
-                        Category*
+                        
                         <option value="CODING">Coding</option>
                         <option value="MATH">Math</option>
                         <option value="SCIENCE">Science</option>
@@ -87,6 +90,7 @@ function CreateCoursePage(){
                     <label>
                         Add an image*
                         <input 
+                            class="form-control"
                             type="file"
                             accept="image/*"
                             onChange={(e)=> setImage(e.target.files[0])}
@@ -99,15 +103,16 @@ function CreateCoursePage(){
                         <input 
                             type="text" 
                             value={description}
+                            class="form-control"
                             onChange={(e)=>setDescription(e.target.value)}
                             required
                         />
                     </label>
                     {err.description && (<p>{err.description}</p>)}
                     <br />
-                    <button type="submit">Continue</button>
+                    <button type="submit" className='btn btn-primary btn-lg mt-2'>Create Course</button>
                 </form>
-                <button><NavLink to={'/'}>Back to Home</NavLink></button>
+                <button className='btn mt-2'><NavLink style={{ color: 'white'}} to={'/'}>Back to Home</NavLink></button>
             </div>
         </div>
         

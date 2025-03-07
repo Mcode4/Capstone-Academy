@@ -31,7 +31,7 @@ function CategoryMenu(){
 
     return (
         <div className="category-container">
-            <div className="nav-button" onClick={toggleMenu}>
+            <div className="nav-button btn btn-primary" onClick={toggleMenu}>
             Categories
             </div>
             {showMenu && (

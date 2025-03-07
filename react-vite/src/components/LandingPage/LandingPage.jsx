@@ -81,7 +81,7 @@ function LandingPage(){
                 </div>
                 <div className="header2">
                     <h3>STUDY AT YOUR OWN PACE</h3>
-                    <img src="../.././public/images/coverImage2.png" alt="" />
+                    <img src="https://my-capstone-proj-bucket.s3.us-east-1.amazonaws.com/coverImage2.png" alt="" />
                 </div>
             </div>
 

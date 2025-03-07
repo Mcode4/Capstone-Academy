@@ -38,7 +38,7 @@ function HomePage(){
                     {loadData[0] === 'error' ? (
                         <p>{loadData[1]}</p>
                     ): loadData.map(course=>(
-                        <div key={course.id} className="course-display-2">
+                        <div key={course.id} className="course-display">
                             <NavLink to={`/course/${course.id}`}>
                                 <img className="post" src={`${course.image}`} alt={course.name} />
                                 <div className="course-info">

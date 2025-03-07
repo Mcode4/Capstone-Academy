@@ -77,6 +77,7 @@ function SignupFormPage() {
           <input
             type="text"
             value={firstName}
+            class="form-control"
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
@@ -88,6 +89,7 @@ function SignupFormPage() {
           <input
             type="text"
             value={lastName}
+            class="form-control"
             onChange={(e) => setLastName(e.target.value)}
           />
         </label>
@@ -98,6 +100,7 @@ function SignupFormPage() {
           <input
             type="text"
             value={email}
+            class="form-control"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -109,6 +112,7 @@ function SignupFormPage() {
           <input
             type="text"
             value={username}
+            class="form-control"
             onChange={(e) => setUsername(e.target.value)}
             required
           />
@@ -120,6 +124,7 @@ function SignupFormPage() {
           <input
             type="password"
             value={password}
+            class="form-control"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
@@ -131,13 +136,14 @@ function SignupFormPage() {
           <input
             type="password"
             value={confirmPassword}
+            class="form-control"
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <br />
-        <button type="submit">Sign Up</button>
+        <button className='btn btn-primary btn-lg mt-2' type="submit">Sign Up</button>
       </form>
     </div>
   );

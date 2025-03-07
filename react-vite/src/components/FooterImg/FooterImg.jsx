@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 function FooterImg(){
     const location = useLocation().pathname.split('/')[1]
-    const locations = ['', 'home', 'login', 'signup']
+    const locations = ['', 'login', 'signup']
     let classToggle = 'offf'
 
     locations.forEach(loc=>{
@@ -15,7 +15,7 @@ function FooterImg(){
     console.log('FOOTER LOCATION', locations)
     return (
         <div id="footer-img" className={classToggle}>
-            <img src="../.././public/images/footerImg2.png" alt="" />
+            <img src="https://my-capstone-proj-bucket.s3.us-east-1.amazonaws.com/footerImg.png" alt="" />
         </div>
     )
 }

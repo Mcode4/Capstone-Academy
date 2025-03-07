@@ -41,7 +41,7 @@ function Navigation() {
     // </ul>
     <div id="navbar">
       <NavLink className="NavLink" to={'/'}>
-        <img src="../.././public/images/caLogo1t.png" alt="" />
+        <img src="https://my-capstone-proj-bucket.s3.us-east-1.amazonaws.com/caLogo1t.png" alt="" />
       </NavLink>
       <div className="right-nav">
         {!user ? (
@@ -52,7 +52,7 @@ function Navigation() {
         ): (
           <>
             <CategoryMenu />
-            <NavLink className="NavLink" to={"create"}>Create Course</NavLink>
+            <NavLink className="btn btn-primary" to={"create"}>Create Course</NavLink>
             <div  className="nav-button two">
             <button onClick={logout} style={{backgroundColor : 'red', color : 'aliceblue', border: 'none'}}>Log Out</button>
             </div>
