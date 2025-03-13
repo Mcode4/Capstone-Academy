@@ -1,6 +1,6 @@
 # Cpastone Academy
 
-This is an online content creation platform that allows you to create courses to teach a skill or view them from others to learn. You can create an account and go from there. Create or view a course, comment, and view users profiles and comments. 
+This is an online content creation platform that allows you to create courses to teach a skill or view them from others to learn. You can create an account and go from there. Create or view a course, comment, and view users profiles and comments. Leave a review on the site! This project is still beening worked on and support is much appreciated.
 
 
 
@@ -24,7 +24,10 @@ This is an online content creation platform that allows you to create courses to
  ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 
-#Features
+## Features
+1. Courses
+2. Comments
+3. Site Reviews
 
 ## Getting started
 
