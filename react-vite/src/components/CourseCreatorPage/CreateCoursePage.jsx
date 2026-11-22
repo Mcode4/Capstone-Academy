@@ -49,7 +49,6 @@ function CreateCoursePage(){
         const server = await dispatch(createCourseThunk(formData))
 
         if(server){
-            console.log('RETURN ON CREAT COURSE JSX', server)
             body.style.pointerEvents = 'auto'
         } else {
             body.style.pointerEvents = 'auto'

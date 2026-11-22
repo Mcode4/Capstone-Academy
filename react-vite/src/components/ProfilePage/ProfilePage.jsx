@@ -10,8 +10,6 @@ function ProfilePage(isLoaded=false){
     const users = useSelector(state => state.users.data)
     const loadData = useLoaderData()
     const user = users[id]
-    console.log('LOAD DATA', loadData)
-    console.log('LOAD DATA @@@@222222', loadData.length)
     return (
         <div id="profile-page">
             {!user ? (

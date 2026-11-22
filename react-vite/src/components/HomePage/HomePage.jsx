@@ -17,12 +17,10 @@ function HomePage(){
     }
 
     if(typeof loadData.courses === 'object'){
-        console.log('TRRRRUUUUEUEEEEEE', loadData)
         const course = loadData.courses
         let courses=[]
         Object.keys(course).forEach(key =>{
             courses.push(course[key])
-            console.log(`KEY: ${key}, DATA: ${course[key]}`)
         })
         loadData = courses
     }

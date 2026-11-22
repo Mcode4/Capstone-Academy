@@ -18,7 +18,6 @@ function CoursePage(){
     const [err, setErr] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    console.log("COMMENTSS", comments)
 
     useEffect(()=>{
         const loadComments = async () => {

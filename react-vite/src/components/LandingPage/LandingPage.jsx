@@ -60,7 +60,6 @@ function LandingPage(){
         }
         const server = await dispatch(postReviewThunk(reviewObj))
         if(server){
-            console.log('RETURN ON CREAT COURSE JSX', server)
             setErr(server)
         } else {
             setSubmitted(true)

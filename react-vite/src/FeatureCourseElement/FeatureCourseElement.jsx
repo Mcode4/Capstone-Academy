@@ -13,7 +13,6 @@ function FeatureCourseElement({ data, title}){
         dispatch(setFeaturedCourses())
     }, [dispatch])
 
-    console.log('DATAA FOR FEATURE', data)
     return (
         <div class='featured-container'>
             {title ? (<h2>{title}</h2>) : (<h2>Featured Courses</h2>)}

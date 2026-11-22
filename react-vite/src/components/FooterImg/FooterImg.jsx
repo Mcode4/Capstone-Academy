@@ -12,7 +12,6 @@ function FooterImg(){
         }
     })
 
-    console.log('FOOTER LOCATION', locations)
     return (
         <div id="footer-img" className={classToggle}>
             <img src="https://my-capstone-proj-bucket.s3.us-east-1.amazonaws.com/footerImg.png" alt="" />

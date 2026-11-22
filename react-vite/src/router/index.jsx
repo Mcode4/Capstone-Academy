@@ -46,11 +46,8 @@ export const router = createBrowserRouter([
         element: <HomePage />,
         loader: async({params})=>{
           const res = await fetch(`/api/courses/category/${params.id}`)
-          console.log('\n CATEGORY DATA 1111111: ', res, '\n')
           if(res.ok){
             const data = await res.json()
-            console.log('\n CATEGORY DATA 2222222: ', data, '\n')
-            console.log('TYPEEEEEE', typeof data)
             return data.courses
           }
           return ['error', `Failed to load ${params.id} courses`]
@@ -63,8 +60,6 @@ export const router = createBrowserRouter([
           const res = await fetch(`/api/courses/${params.id}`)
           if(res.ok){
             const data = await res.json()
-            console.log('\n CATEGORY DATA 2222222: ', data, '\n')
-            console.log('TYPEEEEEE', typeof data)
             return data.courses
           }
           return ['error', `Failed to load user's courses`]

@@ -26,11 +26,8 @@ const removeUsers = (id) => ({
 
 export const loadAllUsers = () => async(dispatch) =>{
     const res = await fetch('/api/users')
-    // console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        // console.log('DATA', data)
-        // console.log('DATA222', data.users)
         dispatch(loadUsers(data.users))
     }
     else if(res.status > 500){

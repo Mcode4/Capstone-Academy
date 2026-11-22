@@ -27,11 +27,8 @@ const editCourse = (course) => ({
 
 export const loadAllCourses = () => async(dispatch)=> {
     const res = await fetch('/api/courses')
-    // console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        // console.log('DATA', data)
-        // console.log('DATA@@@@', data.courses)
         dispatch(loadCourses(data.courses))
     }
     else if(res.status > 500){
@@ -62,19 +59,15 @@ export const createCourseThunk = (course) => async(dispatch) =>{
         method: 'POST',
         body: course
     })
-    console.log('RES', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
         dispatch(createCourse(data))
     }
     else if(res.status > 500){
         const err = await res.json()
-        console.log('ERR FETCHING FEATURED COURSES', err)
         return err
     }
     else {
-        console.log('SOME WENT WRONG ON FEATURED COURSES THUNK')
         const err = await res.json()
         return err
     }
@@ -85,10 +78,8 @@ export const editCourseThunk = (course, id) => async(dispatch) =>{
         method: 'PUT',
         body: course
     })
-    console.log('RES', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
         dispatch(editCourse(data))
     }
     else if(res.status > 500){
@@ -101,14 +92,10 @@ export const editCourseThunk = (course, id) => async(dispatch) =>{
 }
 
 export const removeCoursesThunk = (id) => async(dispatch) =>{
-    console.log('IDD IN THUNK', id)
     const res = await fetch(`/api/courses/${id}`, {
         method: 'DELETE'
     })
-    console.log('RESSSS', res)
     if(res.ok){
-        const data = await res.json()
-        console.log('DATA', data)
         dispatch(removeCourses(id))
     }
     else if(res.status > 500){

@@ -6,7 +6,6 @@ import { editCourseThunk, loadAllCourses } from "../../redux/courses"
 function CourseEditorPage({ isFinished=false, isLoaded=false }){
     const {id} = useParams()
     const course = useSelector(state => state.courses.all)[id]
-    console.log('COURSEEE', course)
     const user = useSelector(state => state.session.user)
     const [name, setName] = useState(course?.name)
     const [category, setCategory] = useState(course?.category)

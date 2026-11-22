@@ -60,7 +60,6 @@ function SignupFormPage() {
     );
 
     if (serverResponse) {
-      console.log('ERRORS: ', serverResponse)
       setErrors(serverResponse);
     } else {
       navigate("/");

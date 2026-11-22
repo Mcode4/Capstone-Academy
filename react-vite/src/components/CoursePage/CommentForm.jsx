@@ -11,7 +11,6 @@ export default function CommentForm({title}){
     const user = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const id = useParams().id
-    console.log('ID', id)
     const {closeModal} = useModal()
 
     const handleSubmit = async (e) =>{
@@ -44,7 +43,6 @@ export default function CommentForm({title}){
         }))
 
         if(serverResponse){
-            console.log('SERVER RES ON COMMENT CREATE', serverResponse)
             return setErr(serverResponse)
         } else {
             closeModal()

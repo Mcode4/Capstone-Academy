@@ -12,19 +12,15 @@ const postReview = (review) => ({
 
 export const loadTopThunk = () => async(dispatch) =>{
     const res = await fetch('/api/site-reviews/highest')
-    console.log('RESSS', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATTAAA', data)
         dispatch(loadTopReviews(data.siteReviews))
     }
     else if(res.status < 500){
         const err = await res.json()
-        console.log('ERR FETCHING REMOVE COURSES', err)
         return err
     }
     else {
-        console.log('SOME WENT WRONG ON REMOVE COURSES THUNK')
         return {server: 'Something went wrong in server, please try again'}
     }
 }
@@ -35,19 +31,15 @@ export const postReviewThunk = (review) => async(dispatch) =>{
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify(review)
     })
-    console.log('RESSS', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATTAAA', data)
         dispatch(postReview(data.siteReview))
     }
     else if(res.status < 500){
         const err = await res.json()
-        console.log('ERR FETCHING REMOVE COURSES', err)
         return err
     }
     else {
-        console.log('SOME WENT WRONG ON REMOVE COURSES THUNK')
         return {server: 'Something went wrong in server, please try again'}
     }
 }

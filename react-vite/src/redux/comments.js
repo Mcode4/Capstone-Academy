@@ -34,7 +34,6 @@ export const loadUserComments = (id) => async(dispatch)=>{
     const res = await fetch(`/api/comments/user/${id}`)
     if(res.ok){
         const data = await res.json()
-        console.log('DATAAAAAAAAAA2222', data)
         dispatch(loadComments(data))
     }
     else if(res.status > 500){
@@ -57,19 +56,15 @@ export const postCommentThunk = (comment) => async(dispatch)=>{
             comment: comment.comment
         })
     })
-    console.log('RESSS', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATAAAAAAAAAA2222', data)
         dispatch(postComment(data))
     }
     else if(res.status > 500){
         const err = await res.json()
-        console.log('ERR FETCHING USER COMMENTS', err)
         return err
     }
     else {
-        console.log('SOME WENT WRONG ON COURSES THUNK')
         return 'SOME WENT WRONG ON COURSES THUNK'
     }
 }
@@ -83,11 +78,9 @@ export const deleteCommentThunk = (id) => async(dispatch) =>{
     }
     else if(res.status > 500){
         const err = await res.json()
-        console.log('ERR DELETING USER COMMENTS', err)
         return err
     }
     else {
-        console.log('SOME WENT WRONG ON DELETE COMMENTS THUNK')
         return 'SOME WENT WRONG ON DELETE COMMENTS THUNK'
     }
 }

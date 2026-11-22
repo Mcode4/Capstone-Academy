@@ -17,10 +17,8 @@ const createPage = (page) =>({
 
 export const loadPagesThunk = (course_id) => async(dispatch) =>{
     const res = await fetch(`/api/pages/course/${course_id}`)
-    console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
         dispatch(loadPages(data.pages))
     }
     else if(res.status > 500){
@@ -36,10 +34,8 @@ export const removePageThunk = (id) => async(dispatch) =>{
     const res = await fetch(`/api/pages/${id}`,{
         method: "DELETE"
     })
-    console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
         dispatch(removePage(data))
     }
     else if(res.status > 500){
@@ -57,10 +53,8 @@ export const createPageThunk = (id) => async(dispatch) =>{
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(id)
     })
-    console.log('RESPONSE', res)
     if(res.ok){
         const data = await res.json()
-        console.log('DATA', data)
         dispatch(createPage(data))
     }
     else if(res.status > 500){
