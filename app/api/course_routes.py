@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from flask_login import current_user, login_required
 from app.models import Course, db
 from app.forms import CourseForm
 from app.models.course import Category
@@ -50,6 +51,7 @@ def get_courses_by_category(id):
     return {"message": "Category not found"}, 404
 
 @course_routes.route('', methods=['POST'])
+@login_required
 def create_course():
     form = CourseForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -66,7 +68,7 @@ def create_course():
         
         url = upload["url"]
         new = Course(
-            owner_id = form.data['owner_id'],
+            owner_id = current_user.id,
             name = form.data['name'],
             category = form.data['category'],
             description = form.data['description'],
@@ -79,10 +81,13 @@ def create_course():
     return form.errors, 400
 
 @course_routes.route('/edit/<int:id>', methods=['PUT', 'PATCH'])
+@login_required
 def edit_course(id):
     course = Course.query.get(id)
     if course is None:
         return {"message": "Course not found"}, 404
+    if course.owner_id != current_user.id:
+        return {"message": "Forbidden"}, 403
     form = CourseForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     print('\n FORM INFO: ', form.data, '\n')
@@ -107,11 +112,14 @@ def edit_course(id):
     return form.errors, 400
 
 @course_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
 def delete_course(id):
     course = Course.query.get(id)
     print('\n COURSE INFO: ', course.to_dict(), '\n')
     if course is None:
         return {"message": "Course not found"}, 404
+    if course.owner_id != current_user.id:
+        return {"message": "Forbidden"}, 403
     db.session.delete(course)
     db.session.commit()
     return {"message": "course successfully deleted"}, 200

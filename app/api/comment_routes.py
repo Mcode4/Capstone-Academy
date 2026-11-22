@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from flask_login import current_user, login_required
 from app.models import Comment, db
 from app.forms import CommentForm
 from sqlalchemy import desc
@@ -16,6 +17,7 @@ def get_user_comments(id):
     return {'comments': [comment.to_dict() for comment in comments]}
 
 @comment_routes.route('', methods=['POST'])
+@login_required
 def add_comment():
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -24,7 +26,7 @@ def add_comment():
     if form.validate_on_submit():
         print('VALIDATED')
         new = Comment(
-            owner_id = form.data['owner_id'],
+            owner_id = current_user.id,
             course_id = form.data['course_id'],
             # rating = form.data['rating'],
             comment = form.data['comment']
@@ -35,10 +37,13 @@ def add_comment():
     return form.errors, 400
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
 def delete_comment(id):
     comment = Comment.query.get(id)
     if comment is None:
         return {"message": "comment could not be found"}, 404
+    if comment.owner_id != current_user.id:
+        return {"message": "Forbidden"}, 403
     db.session.delete(comment)
     db.session.commit()
     return {"message": "comment successfully deleted"}, 200
