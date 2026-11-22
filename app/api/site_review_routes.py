@@ -19,7 +19,6 @@ def get_highest_reviews():
 def add_review():
     form = SiteReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(f'\n FORM DATAA: {form.data} \n')
     if form.validate_on_submit():
         new = SiteReview(
             first_name = form.data["first_name"],

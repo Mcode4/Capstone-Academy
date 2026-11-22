@@ -13,8 +13,6 @@ def users():
     """
     # users = User.query.options(joinedload(User.courses), joinedload(User.comments), joinedload(User.notifications)).all()
     users = User.query.all()
-    # print('\n USERS', users)
-    # print('2!!!!:', [user.to_dict() for user in users], '\n')
     return {'users': {user.id : user.to_dict() for user in users}}
 
 

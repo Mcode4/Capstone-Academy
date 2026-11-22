@@ -21,10 +21,7 @@ def get_user_comments(id):
 def add_comment():
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('\n FORM INFO: ', request.cookies['csrf_token'], '\n')
-    print('\n FORM INFO: ', form.data, '\n')
     if form.validate_on_submit():
-        print('VALIDATED')
         new = Comment(
             owner_id = current_user.id,
             course_id = form.data['course_id'],
