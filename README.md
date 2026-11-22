@@ -1,158 +1,130 @@
-# Cpastone Academy
+# Capstone Academy
 
-This is an online content creation platform that allows you to create courses to teach a skill or view them from others to learn. You can create an account and go from there. Create or view a course, comment, and view users profiles and comments. Leave a review on the site! This project is still beening worked on and support is much appreciated.
+A course-sharing platform where anyone can sign up, publish a course (name, category, description and cover image), browse courses by category, and discuss them in comments. Visitors can also leave a rating and review for the site itself.
 
+This is a solo full-stack capstone project built for **App Academy** (March 2025): a Flask + PostgreSQL REST API and a React + Redux single-page frontend, with image uploads stored in AWS S3.
 
+**Live site:** [capstone-academy.onrender.com](https://capstone-academy.onrender.com)
+> The app is hosted on Render's free tier, so it spins down when idle. The first request after a quiet period can take up to a minute while the service wakes up.
 
-[Visit the Live Site](https://capstone-academy.onrender.com)
+## Screenshots
+
+<!-- TODO: add screenshots -->
+
+## Features
+
+- **Authentication** - sign up, log in and log out with session-based auth (Flask-Login) and CSRF protection. A "Demo Login" button on the login page signs in as a seeded demo user.
+- **Courses** - create a course with a name, category (Coding, Math, Science, Language or Fun), description and cover image. Course owners can edit or delete their own courses; the API enforces this (403 for anyone else).
+- **Browse and filter** - view all courses, filter by category from the navigation menu, see featured courses on the landing page, and open any course for its full details.
+- **Comments** - logged-in users can comment on a course and delete their own comments.
+- **User profiles** - each user has a profile page listing the courses they have created.
+- **Site reviews** - anyone can submit a star rating and short review; the highest-rated reviews are shown on the landing page.
+- **Image uploads** - course images are uploaded to an AWS S3 bucket (replaced and cleaned up when a course image is changed).
 
 ## Tech Stack
 
-### Frameworks and Libraries
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
-![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) 
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
-![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) 
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+**Frontend** - React 18, Redux (redux-thunk), React Router 6, Vite, Bootstrap, react-icons, plain CSS
 
- ### Database:
- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
- 
- ### Hosting:
- ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+**Backend** - Python 3.9, Flask 2.2, Flask-SQLAlchemy / SQLAlchemy 1.4, Flask-Migrate (Alembic), Flask-Login, Flask-WTF (forms + CSRF), Flask-CORS, Gunicorn, boto3
 
+**Database** - PostgreSQL in production (schema-prefixed tables), SQLite works for local development
 
-## Features
-1. Courses
-2. Comments
-3. Site Reviews
+**Infrastructure** - AWS S3 (image storage), Docker, Render (hosting)
 
-## Getting started
+## Database Schema
 
-1. Clone this repository (only this branch).
+Four tables are active in the current migration:
 
-2. Install dependencies.
+| Table | Key columns | Relationships |
+| --- | --- | --- |
+| `users` | id, first_name, last_name, username (unique), email (unique), hashed_password, image, bio | has many `courses` and `comments` |
+| `courses` | id, owner_id, name, category (enum: CODING, MATH, SCIENCE, LANGUAGE, FUN), description, image | belongs to a `user`; has many `comments` (deleted along with the course) |
+| `comments` | id, owner_id, course_id, comment | belongs to a `user` and a `course` |
+| `site_reviews` | id, first_name, last_name, rating, review | standalone |
+
+All tables also have `createdAt` (and `updatedAt` where applicable). Models for `pages`, `page_contents`, `notifications` and `admins` exist in `app/models/` as groundwork for future features but are not registered or migrated yet.
+
+## API Routes
+
+All routes are served under `/api`. Mutating requests expect the `csrf_token` cookie set by the server.
+
+| Method | Path | Auth | Purpose |
+| --- | --- | --- | --- |
+| GET | `/api/auth/` | - | Return the current user, or 401 |
+| POST | `/api/auth/login` | - | Log in with email and password |
+| GET | `/api/auth/logout` | - | Log the current user out |
+| POST | `/api/auth/signup` | - | Create an account and log in |
+| GET | `/api/auth/unauthorized` | - | JSON 401 used by Flask-Login redirects |
+| GET | `/api/users/` | - | List all users |
+| GET | `/api/users/<id>` | - | Get one user |
+| GET | `/api/courses` | - | List all courses |
+| GET | `/api/courses/featured` | - | Four featured courses |
+| GET | `/api/courses/<owner_id>` | - | List courses created by a user |
+| GET | `/api/courses/category/<category>` | - | List courses in a category (`coding`, `math`, `science`, `language`, `fun`) |
+| POST | `/api/courses` | Login | Create a course (multipart form with image upload) |
+| PUT / PATCH | `/api/courses/edit/<id>` | Owner | Edit a course and replace its image |
+| DELETE | `/api/courses/<id>` | Owner | Delete a course |
+| GET | `/api/comments/course/<id>` | - | List comments on a course |
+| GET | `/api/comments/user/<id>` | - | List comments written by a user |
+| POST | `/api/comments` | Login | Add a comment |
+| DELETE | `/api/comments/<id>` | Owner | Delete a comment |
+| GET | `/api/site-reviews` | - | List all site reviews |
+| GET | `/api/site-reviews/highest` | - | Top eight reviews by rating, then date |
+| POST | `/api/site-reviews` | - | Submit a site review |
+| GET | `/api/docs` | - | Auto-generated list of routes |
+
+## Running Locally
+
+**Prerequisites:** Python 3.9, Pipenv, Node.js and npm. For image uploads you also need an S3 bucket and credentials.
+
+1. Clone the repository and `cd` into it.
+
+2. Install the backend dependencies:
 
    ```bash
    pipenv install -r requirements.txt
    ```
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+3. Copy `.env.example` to `.env` and fill in your own values. The app reads these variables:
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+   | Variable | Purpose |
+   | --- | --- |
+   | `SECRET_KEY` | Flask session / CSRF signing key |
+   | `DATABASE_URL` | SQLAlchemy URL, e.g. `sqlite:///dev.db` locally or a PostgreSQL URL |
+   | `SCHEMA` | PostgreSQL schema name (snake_case); used when `FLASK_ENV=production` |
+   | `FLASK_ENV` | Set to `production` only when deploying |
+   | `FLASK_RUN_PORT` | Port for the dev server (the frontend proxy expects `8000`) |
+   | `S3_BUCKET`, `S3_KEY`, `S3_SECRET` | AWS S3 bucket name and credentials for image uploads |
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
+   Never commit your `.env` file.
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+4. Create the tables, seed demo data and start the API:
 
    ```bash
    pipenv shell
-   ```
-
-   ```bash
    flask db upgrade
-   ```
-
-   ```bash
    flask seed all
-   ```
-
-   ```bash
    flask run
    ```
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+   The API runs on http://localhost:8000 (port set in `.flaskenv`).
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+5. In a second terminal, start the frontend:
 
-## Deployment through Render.com
+   ```bash
+   cd react-vite
+   npm install
+   npm run dev
+   ```
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+   Vite proxies `/api` requests to the Flask server on port 8000.
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+6. Log in with the "Demo Login" button, or with any seeded user.
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+### Deployment notes
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+Production runs from the included `Dockerfile` on Render (`flask db upgrade && flask seed all && gunicorn app:app`). The Flask app serves the prebuilt React bundle from `react-vite/dist`, which is why that folder is committed - run `npm run build` in `react-vite` (it runs in watch mode; stop it with Ctrl+C once the bundle is built) and commit the result after frontend changes. Set `SECRET_KEY`, `DATABASE_URL`, `SCHEMA`, `FLASK_ENV=production` and the `S3_*` variables in the Render dashboard.
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+## Author
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
-
-Start by giving your application a name.
-
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
-
-Select "Free" as your Instance Type.
-
-### Add environment variables
-
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from the **External Database URL** field)
-
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
-
-### Deploy
-
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
-
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
-
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+Marcellies Armstrong - [@Mcode4](https://github.com/Mcode4)
