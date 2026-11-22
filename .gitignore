@@ -4,3 +4,28 @@ __pycache__/
 .venv
 .DS_Store
 .vscode/
+
+# Local databases
+instance/
+*.db
+*.sqlite3
+
+# Python
+.pytest_cache/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Env files (keep the example template)
+.env.*
+!.env.example
+
+# Editors / OS
+.idea/
+.DS_Store
+*.log
+
+# Old starter build output (the live build is react-vite/dist, which the Dockerfile serves)
+1-old-starter/react-vite/dist/
